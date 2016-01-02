@@ -54,6 +54,7 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Device Interaction</a><ul>
+<li><a class="reference internal" href="#protocol">Protocol</a></li>
 <li><a class="reference internal" href="#authentication">Authentication</a></li>
 <li><a class="reference internal" href="#proxies">Proxies</a></li>
 <li><a class="reference internal" href="#classes">Classes</a></li>
@@ -97,10 +98,90 @@
             
   <div class="section" id="device-interaction">
 <span id="devices"></span><h1>Device Interaction<a class="headerlink" href="#device-interaction" title="Permalink to this headline">¶</a></h1>
+<p>Several devices which supports UPnP also support a way to control/run actions on the device. Certain devices, like TR64
+supporting devices, let you totally configure and monitor any functionality. To be able to execute an actions the
+following information&#8217;s are needed:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Control URI</li>
+<li>Namespace</li>
+<li>Action name</li>
+<li>Optional parameters</li>
+</ul>
+</div></blockquote>
+<p>The control URI which is called to place the action and also the namespace aka service type is needed. The
+namespace defines the scope or service type of the given action, the same action name can appear in different
+namespaces.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p>The tools which have been provided with this library shows good use of the full library.</p>
 <p class="last"><a class="reference external" href="http://www.upnp-hacks.org/upnp.html">Additional short explanation of the UPnP protocol</a></p>
+</div>
+<div class="section" id="protocol">
+<h2>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h2>
+<p>The protocol which controls/execute an action is based on the UPnP standard which itself uses SOAP. The following
+python call:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">simpletr64</span><span class="o">.</span><span class="n">DeviceTR64</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">178.1</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">49000</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;/upnp/control/hosts&quot;</span><span class="p">,</span> <span class="s">&quot;urn:dslforum-org:service:Hosts:1&quot;</span><span class="p">,</span> <span class="s">&quot;GetGenericHostEntry&quot;</span><span class="p">,</span> <span class="n">NewIndex</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">{&#39;NewActive&#39;: &#39;0&#39;, &#39;NewIPAddress&#39;: &#39;192.168.0.23&#39;, &#39;NewMACAddress&#39;: &#39;9C:20:7B:E7:FF:5F&#39;, &#39;NewInterfaceType&#39;:</span>
+<span class="go">    &#39;Ethernet&#39;, &#39;NewHostName&#39;: &#39;Apple-TV&#39;, &#39;NewAddressSource&#39;: &#39;DHCP&#39;, &#39;NewLeaseTimeRemaining&#39;: &#39;0&#39;}</span>
+</pre></div>
+</div>
+<p>will create the following Action request:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre>POST /upnp/control/hosts HTTP/1.1
+Host: 192.168.178.1:49000
+Content-Length: 422
+Accept-Encoding: gzip, deflate
+Soapaction: &quot;urn:dslforum-org:service:Hosts:1#GetGenericHostEntry&quot;
+Accept: */*
+User-Agent: python-requests/2.5.4.1 CPython/2.6.9 Darwin/15.2.0
+Connection: keep-alive
+Content-Type: text/xml; charset=&quot;UTF-8&quot;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soap:Envelope
+    xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;
+    xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+    &lt;soap:Header/&gt;
+    &lt;soap:Body&gt;
+        &lt;GetGenericHostEntry xmlns=&quot;urn:dslforum-org:service:Hosts:1&quot;&gt;
+            &lt;NewIndex&gt;1&lt;/NewIndex&gt;
+        &lt;/GetGenericHostEntry&gt;
+&lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<p>An example response:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre>HTTP/1.1 200 OK
+DATE: Sat, 02 Jan 2016 14:12:44 GMT
+SERVER: FRITZ!Box Fon WLAN 7390 UPnP/1.0 AVM FRITZ!Box Fon WLAN 7390 84.06.30
+CONNECTION: keep-alive
+CONTENT-LENGTH: 576
+CONTENT-TYPE: text/xml; charset=&quot;utf-8&quot;
+EXT:
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;s:Envelope xmlns:s=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; s:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
+&lt;s:Body&gt;
+&lt;u:GetGenericHostEntryResponse xmlns:u=&quot;urn:dslforum-org:service:Hosts:1&quot;&gt;
+&lt;NewIPAddress&gt;192.168.0.23&lt;/NewIPAddress&gt;
+&lt;NewAddressSource&gt;DHCP&lt;/NewAddressSource&gt;
+&lt;NewLeaseTimeRemaining&gt;0&lt;/NewLeaseTimeRemaining&gt;
+&lt;NewMACAddress&gt;9C:20:7B:E7:FF:5F&lt;/NewMACAddress&gt;
+&lt;NewInterfaceType&gt;Ethernet&lt;/NewInterfaceType&gt;
+&lt;NewActive&gt;0&lt;/NewActive&gt;
+&lt;NewHostName&gt;Apple-TV&lt;/NewHostName&gt;
+&lt;/u:GetGenericHostEntryResponse&gt;
+&lt;/s:Body&gt;
+&lt;/s:Envelope&gt;
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="authentication">
 <span id="id1"></span><h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
