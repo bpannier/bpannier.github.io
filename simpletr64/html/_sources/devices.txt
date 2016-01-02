@@ -16,6 +16,9 @@ The control URI which is called to place the action and also the namespace aka s
 namespace defines the scope or service type of the given action, the same action name can appear in different
 namespaces.
 
+Any device which supports TR64, DNLA or any other protocol which is based on UPnP can be controlled with this
+library.
+
 .. seealso::
 
     :meth:`~simpletr64.DeviceTR64.execute`
