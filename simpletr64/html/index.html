@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="top" title="Simple TR64 UPnP 1.01 documentation" href="#" />
-    <link rel="next" title="Discover UPnP Devices" href="discover.html" />
+    <link rel="next" title="Installation" href="install.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
@@ -40,7 +40,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="discover.html" title="Discover UPnP Devices"
+          <a href="install.html" title="Installation"
              accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
       </ul>
@@ -50,15 +50,15 @@
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Simple TR64 UPnP</a><ul>
-<li><a class="reference internal" href="#api-documentation">API Documentation</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="discover.html"
-                        title="next chapter">Discover UPnP Devices</a></p>
+  <p class="topless"><a href="install.html"
+                        title="next chapter">Installation</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -89,11 +89,39 @@
             
   <div class="section" id="simple-tr64-upnp">
 <h1>Simple TR64 UPnP<a class="headerlink" href="#simple-tr64-upnp" title="Permalink to this headline">¶</a></h1>
-<p>Release v1.01. (<span class="xref std std-ref">Installation</span>)</p>
-<div class="section" id="api-documentation">
-<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Release v1.01. (<a class="reference internal" href="install.html#install"><span>Installation</span></a>)</p>
+<p>This library supports the discovery of UPnP devices in the local network and let you execute actions on them if
+the device supports them. Also it contains a convenient way to execute TR64 protocol actions on route or other network
+devices which supports TR64.</p>
+<p>Discover and execute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">simpletr64</span><span class="o">.</span><span class="n">discover</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">LOC: http://192.168.178.1:49000/tr64desc.xml SRV: urn:dslforum-org:device:InternetGatewayDevice:1</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">simpletr64</span><span class="o">.</span><span class="n">DeviceTR64</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">178.1</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">49000</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;/upnp/control/hosts&quot;</span><span class="p">,</span> <span class="s">&quot;urn:dslforum-org:service:Hosts:1&quot;</span><span class="p">,</span> <span class="s">&quot;GetGenericHostEntry&quot;</span><span class="p">,</span> <span class="n">NewIndex</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">{&#39;NewActive&#39;: &#39;0&#39;, &#39;NewIPAddress&#39;: &#39;192.168.0.23&#39;, &#39;NewMACAddress&#39;: &#39;9C:20:7B:E7:FF:5F&#39;, &#39;NewInterfaceType&#39;:</span>
+<span class="go">    &#39;Ethernet&#39;, &#39;NewHostName&#39;: &#39;Apple-TV&#39;, &#39;NewAddressSource&#39;: &#39;DHCP&#39;, &#39;NewLeaseTimeRemaining&#39;: &#39;0&#39;}</span>
+</pre></div>
+</div>
+<p>or even easier, execute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">DeviceTR64</span><span class="p">(</span><span class="s">&quot;fritz.box&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span><span class="o">.</span><span class="n">setupTR64Device</span><span class="p">(</span><span class="s">&quot;fritz.box&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">getSystemInfo</span><span class="p">()</span><span class="o">.</span><span class="n">manufactureName</span><span class="p">)</span>
+<span class="go">&quot;AVM&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#distribute-pip">Distribute &amp; Pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#get-the-code">Get the Code</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="discover.html">Discover UPnP Devices</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="discover.html#protocol">Protocol</a></li>
 <li class="toctree-l2"><a class="reference internal" href="discover.html#classes">Classes</a></li>
@@ -122,7 +150,6 @@
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
 </ul>
 </div>
@@ -140,7 +167,7 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="discover.html" title="Discover UPnP Devices"
+          <a href="install.html" title="Installation"
              >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
       </ul>
