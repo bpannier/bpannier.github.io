@@ -1,0 +1,481 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Discover UPnP Devices &mdash; Simple TR64 UPnP 1.01 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.01',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="Simple TR64 UPnP 1.01 documentation" href="index.html" />
+    <link rel="next" title="Device Interaction" href="devices.html" />
+    <link rel="prev" title="Simple TR64 UPnP" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="devices.html" title="Device Interaction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Simple TR64 UPnP"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Discover UPnP Devices</a><ul>
+<li><a class="reference internal" href="#protocol">Protocol</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Simple TR64 UPnP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="devices.html"
+                        title="next chapter">Device Interaction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/discover.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="discover-upnp-devices">
+<span id="discover"></span><h1>Discover UPnP Devices<a class="headerlink" href="#discover-upnp-devices" title="Permalink to this headline">¶</a></h1>
+<p>The UPnP protocol is used to discover certain devices in the local network and to a certain extend also to interact
+with them.</p>
+<p>The discovery mechanism is to send a multicast request which gets answered by UPnP devices in the
+HTTP format. The combination of devices in potential stand-by mode and multicast let the discovery fail infrequently.
+For that reason a retry is strongly recommended to make sure to get answers from all UPnP device in the
+network. Also the service type which is included in the request matters for some devices, it is recommended to use the
+most specific service type, if known, for a device as some devices answers differently depending on the service type.
+Recommendation is to use after a broader <a class="reference internal" href="#simpletr64.Discover.discover" title="simpletr64.Discover.discover"><code class="xref py py-meth docutils literal"><span class="pre">discover()</span></code></a> the more specific
+<a class="reference internal" href="#simpletr64.Discover.discoverParticularHost" title="simpletr64.Discover.discoverParticularHost"><code class="xref py py-meth docutils literal"><span class="pre">discoverParticularHost()</span></code></a> again for every device you are interested in as that method
+do some magic to find all the information&#8217;s which a device can provide.</p>
+<p>The discovery mechanism is the only way to gather the URL to the device specifications, which is needed if you like
+to interact with a device. Not all UPnP devices support an interaction based on the standard and provide only a
+proprietary way for which you need the vendor documentation.</p>
+<p>This library provides in the tools directory several tools which shows how to use the library for the different use
+cases.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>The tools which have been provided with this library shows good use of the full library.</p>
+<p class="last"><a class="reference external" href="http://www.upnp-hacks.org/upnp.html">Additional short explanation of the UPnP protocol</a></p>
+</div>
+<div class="section" id="protocol">
+<h2>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h2>
+<p>This example illustrates what the library sends and receives during a discovery process, whereas the example is given
+for a specific service type.</p>
+<p>Request:</p>
+<p>A discovery request is send via IP multicast on 239.255.255.250:1900.</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre>M-SEARCH * HTTP/1.1\r\n
+MX: 5\r\n
+MAN: &quot;ssdp:discover&quot;\r\n
+HOST: 239.255.255.250:1900\r\n
+ST: urn:dslforum-org:device:InternetGatewayDevice:1\r\n
+\r\n
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt>Response:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre>HTTP/1.1 200 OK\r\n
+LOCATION: http://192.168.178.1:49000/tr64desc.xml\r\n
+SERVER: FRITZ!Box Fon WLAN 7390 UPnP/1.0 AVM FRITZ!Box Fon WLAN 7390 84.06.30\r\n
+CACHE-CONTROL: max-age=1800\r\n
+EXT:\r\n
+ST: urn:dslforum-org:device:InternetGatewayDevice:1\r\n
+USN: uuid:739f2419-bccb-40e7-8e6c-BC254222D5C4::urn:dslforum-org:device:InternetGatewayDevice:1\r\n
+\r\n
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="simpletr64.Discover">
+<em class="property">class </em><code class="descclassname">simpletr64.</code><code class="descname">Discover</code><a class="headerlink" href="#simpletr64.Discover" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides several static methods to discover UPnP devices.</p>
+<dl class="staticmethod">
+<dt id="simpletr64.Discover.discover">
+<em class="property">static </em><code class="descname">discover</code><span class="sig-paren">(</span><em>service='ssdp:all'</em>, <em>timeout=1</em>, <em>retries=2</em>, <em>ipAddress='239.255.255.250'</em>, <em>port=1900</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.Discover.discover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discovers UPnP devices in the local network.</p>
+<p>Try to discover all devices in the local network which do support UPnP. The discovery process can fail
+for various reasons and it is recommended to do at least two discoveries, which you can specify with the
+<code class="docutils literal"><span class="pre">retries</span></code> parameter.</p>
+<p>The default <code class="docutils literal"><span class="pre">service</span></code> parameter tries to address all devices also if you know which kind of service type
+you are looking for you should set it as some devices do not respond or respond differently otherwise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>service</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the service type of devices you look for</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the socket timeout for each try</li>
+<li><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; how often should be a discovery request send</li>
+<li><strong>ipAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the multicast ip address to use</li>
+<li><strong>port</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the port to use</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of DiscoveryResponse objects or empty if no device was found</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list[DiscoveryResponse]</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="n">results</span> <span class="o">=</span> <span class="n">discover</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Host: &quot;</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">locationHost</span> <span class="o">+</span> <span class="s">&quot; Port: &quot;</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">locationPort</span> <span class="o">+</span> <span class="s">&quot; Device definitions: &quot;</span> <span class="o">+</span> \
+        <span class="n">result</span><span class="o">.</span><span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DiscoveryResponse" title="simpletr64.DiscoveryResponse"><code class="xref py py-class docutils literal"><span class="pre">DiscoveryResponse</span></code></a>, <a class="reference internal" href="#simpletr64.Discover.discoverParticularHost" title="simpletr64.Discover.discoverParticularHost"><code class="xref py py-meth docutils literal"><span class="pre">discoverParticularHost()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="simpletr64.Discover.discoverParticularHost">
+<em class="property">static </em><code class="descname">discoverParticularHost</code><span class="sig-paren">(</span><em>host</em>, <em>service='ssdp:all'</em>, <em>deviceDefinitionURL=None</em>, <em>timeout=1</em>, <em>retries=2</em>, <em>ipAddress='239.255.255.250'</em>, <em>port=1900</em>, <em>proxies=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.Discover.discoverParticularHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discover a particular host and find the best response.</p>
+<p>This tries to find the most specific discovery result for the given host. Only the discovery result contains
+the URL to the XML tree which initializes the device definition. If an URL is already known it should be
+provided to avoid additional latency for a broader first device discovery.
+This method also do some magic to find the best result for the given host as UPnP devices behave sometimes
+strangely. This call is costly the result if any should be cached.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>host</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the host to find</li>
+<li><strong>service</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the service if known to search for</li>
+<li><strong>deviceDefinitionURL</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; if provided it is used to skip a first device discovery</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the time to wait for each retry</li>
+<li><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the amount of times how often the device is tried to discover</li>
+<li><strong>ipAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the multicast ip address to discover devices</li>
+<li><strong>port</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the port to discover devices</li>
+<li><strong>proxies</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; proxy definition as defined here:
+<a class="reference external" href="http://docs.python-requests.org/en/latest/user/advanced/#proxies">Proxy definition</a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">If the device have been found the response is returned otherwise None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#simpletr64.DiscoveryResponse" title="simpletr64.DiscoveryResponse">DiscoveryResponse</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">if problems with reading or parsing the xml device definition occurs</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;http&quot;</span><span class="p">:</span> <span class="s">&quot;http://localhost:8888&quot;</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">discoverParticularHost</span><span class="p">(</span><span class="s">&quot;192.168.0.1&quot;</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Host: &quot;</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">locationHost</span> <span class="o">+</span> <span class="s">&quot; Port: &quot;</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">locationPort</span> <span class="o">+</span> <span class="s">&quot; Device definitions: &quot;</span> <span class="o">+</span> \
+        <span class="n">result</span><span class="o">.</span><span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DiscoveryResponse" title="simpletr64.DiscoveryResponse"><code class="xref py py-class docutils literal"><span class="pre">DiscoveryResponse</span></code></a>, <a class="reference internal" href="#simpletr64.Discover.discover" title="simpletr64.Discover.discover"><code class="xref py py-meth docutils literal"><span class="pre">discover()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="simpletr64.Discover.rateServiceTypeInResult">
+<em class="property">static </em><code class="descname">rateServiceTypeInResult</code><span class="sig-paren">(</span><em>discoveryResponse</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.Discover.rateServiceTypeInResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a quality rating for a given service type in a result, higher is better.</p>
+<p>Several UpnP devices reply to a discovery request with multiple responses with different service type
+announcements. To find the most specific one we need to be able rate the service types against each other.
+Usually this is an internal method and just exported for convenience reasons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discoveryResponse</strong> (<a class="reference internal" href="#simpletr64.DiscoveryResponse" title="simpletr64.DiscoveryResponse"><em>DiscoveryResponse</em></a>) &#8211; the response to rate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a rating of the quality of the given service type</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.DiscoveryResponse">
+<em class="property">class </em><code class="descclassname">simpletr64.</code><code class="descname">DiscoveryResponse</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DiscoveryResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper class for results of discovery requests.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.Discover.discover" title="simpletr64.Discover.discover"><code class="xref py py-meth docutils literal"><span class="pre">discover()</span></code></a>, <a class="reference internal" href="#simpletr64.Discover.discoverParticularHost" title="simpletr64.Discover.discoverParticularHost"><code class="xref py py-meth docutils literal"><span class="pre">discoverParticularHost()</span></code></a></p>
+</div>
+<dl class="staticmethod">
+<dt id="simpletr64.DiscoveryResponse.create">
+<em class="property">static </em><code class="descname">create</code><span class="sig-paren">(</span><em>location</em>, <em>service='uuid:none'</em>, <em>usn='none'</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DiscoveryResponse.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory method to create an DiscoverResponse object with dedicated parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>location</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the location of the new object</li>
+<li><strong>service</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; which service should be used</li>
+<li><strong>usn</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the device id which should be used</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.DiscoveryResponse" title="simpletr64.DiscoveryResponse">DiscoveryResponse</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DiscoveryResponse.getheaders">
+<code class="descname">getheaders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DiscoveryResponse.getheaders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all headers from the response</p>
+<p>This gives the ability to access all HTTP headers of a discovery response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict[str, str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DiscoveryResponse.location">
+<code class="descname">location</code><a class="headerlink" href="#simpletr64.DiscoveryResponse.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the location of the discovery response which points to the device definitions.</p>
+<p>The location usually is a full URL to an XML device definition, example
+<code class="docutils literal"><span class="pre">http://192.168.0.24:49000/tr64desc.xml</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the location</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DiscoveryResponse.locationHost">
+<code class="descname">locationHost</code><a class="headerlink" href="#simpletr64.DiscoveryResponse.locationHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the host or IP address  of the location URL.</p>
+<p>For the given example: <code class="docutils literal"><span class="pre">http://192.168.0.24:49000/tr64desc.xml</span></code> the result would be <code class="docutils literal"><span class="pre">192.168.0.24</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the extracted host part of the location URL</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DiscoveryResponse.locationPath">
+<code class="descname">locationPath</code><a class="headerlink" href="#simpletr64.DiscoveryResponse.locationPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the URI path of the location URL.</p>
+<p>For the given example: <code class="docutils literal"><span class="pre">http://192.168.0.24:49000/tr64desc.xml</span></code> the result would be <code class="docutils literal"><span class="pre">/tr64desc.xml</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the extracted URI of the location URL</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DiscoveryResponse.locationPort">
+<code class="descname">locationPort</code><a class="headerlink" href="#simpletr64.DiscoveryResponse.locationPort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the port of the location URL.</p>
+<p>For the given example: <code class="docutils literal"><span class="pre">http://192.168.0.24:49000/tr64desc.xml</span></code> the result would be <code class="docutils literal"><span class="pre">49000</span></code>. If no
+port was given the port is assumed based on the protocol.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the extracted port of the location URL</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DiscoveryResponse.locationProtocol">
+<code class="descname">locationProtocol</code><a class="headerlink" href="#simpletr64.DiscoveryResponse.locationProtocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the protocol of the location URL.</p>
+<p>For the given example: <code class="docutils literal"><span class="pre">http://192.168.0.24:49000/tr64desc.xml</span></code> the result would be <code class="docutils literal"><span class="pre">http</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the extracted protocol of the location URL</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DiscoveryResponse.service">
+<code class="descname">service</code><a class="headerlink" href="#simpletr64.DiscoveryResponse.service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the service which was announced by the device response.</p>
+<p>Example: <code class="docutils literal"><span class="pre">urn:dslforum-org:device:InternetGatewayDevice:1</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the service type</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DiscoveryResponse.usn">
+<code class="descname">usn</code><a class="headerlink" href="#simpletr64.DiscoveryResponse.usn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the device id of the device which responded.</p>
+<p>Example: <code class="docutils literal"><span class="pre">uuid:739f2419-bccb-40e7-8e6c-BC254222D5C4::urn:dslforum-org:device:InternetGatewayDevice:1</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the device id</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="devices.html" title="Device Interaction"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Simple TR64 UPnP"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Benjamin Pannier.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+    </div>
+  </body>
+</html>

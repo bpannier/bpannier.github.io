@@ -1,0 +1,670 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Device Interaction &mdash; Simple TR64 UPnP 1.01 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.01',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="Simple TR64 UPnP 1.01 documentation" href="index.html" />
+    <link rel="next" title="TR 64 Protocol Actions" href="tr64.html" />
+    <link rel="prev" title="Discover UPnP Devices" href="discover.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tr64.html" title="TR 64 Protocol Actions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="discover.html" title="Discover UPnP Devices"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Device Interaction</a><ul>
+<li><a class="reference internal" href="#authentication">Authentication</a></li>
+<li><a class="reference internal" href="#proxies">Proxies</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="discover.html"
+                        title="previous chapter">Discover UPnP Devices</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tr64.html"
+                        title="next chapter">TR 64 Protocol Actions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/devices.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="device-interaction">
+<span id="devices"></span><h1>Device Interaction<a class="headerlink" href="#device-interaction" title="Permalink to this headline">¶</a></h1>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>The tools which have been provided with this library shows good use of the full library.</p>
+<p class="last"><a class="reference external" href="http://www.upnp-hacks.org/upnp.html">Additional short explanation of the UPnP protocol</a></p>
+</div>
+<div class="section" id="authentication">
+<span id="id1"></span><h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>Depending on the device and the settings some actions might need you to authenticate before you call the action. Again
+depending on the device and the settings you might be requested to provide a username and password or some devices
+might only ask for a password, please check your configuration. When you set username/password or just password the
+authentication will be done transparently.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">device</span> <span class="o">=</span> <span class="n">DeviceTR64</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">device</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">&quot;my secret&quot;</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.username" title="simpletr64.DeviceTR64.username"><code class="xref py py-meth docutils literal"><span class="pre">username()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.password" title="simpletr64.DeviceTR64.password"><code class="xref py py-meth docutils literal"><span class="pre">password()</span></code></a></p>
+</div>
+</div>
+<div class="section" id="proxies">
+<h2>Proxies<a class="headerlink" href="#proxies" title="Permalink to this headline">¶</a></h2>
+<p>For any http/https call a proxy can be set, the way depends on the Class you use. The DeviceTR64 class supports it via
+<a class="reference internal" href="#simpletr64.DeviceTR64.httpProxy" title="simpletr64.DeviceTR64.httpProxy"><code class="xref py py-meth docutils literal"><span class="pre">httpProxy()</span></code></a> and <a class="reference internal" href="#simpletr64.DeviceTR64.httpsProxy" title="simpletr64.DeviceTR64.httpsProxy"><code class="xref py py-meth docutils literal"><span class="pre">httpsProxy()</span></code></a>; the method
+<a class="reference internal" href="discover.html#simpletr64.Discover.discoverParticularHost" title="simpletr64.Discover.discoverParticularHost"><code class="xref py py-meth docutils literal"><span class="pre">discoverParticularHost()</span></code></a> in the
+<a class="reference internal" href="discover.html#simpletr64.Discover" title="simpletr64.Discover"><code class="xref py py-class docutils literal"><span class="pre">Discover</span></code></a> class ask you to provide the proxy definition
+for each call. Please, see the dedicated methods documentation for how to specify the proxies as the definition differs.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.httpProxy" title="simpletr64.DeviceTR64.httpProxy"><code class="xref py py-meth docutils literal"><span class="pre">httpProxy()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.httpsProxy" title="simpletr64.DeviceTR64.httpsProxy"><code class="xref py py-meth docutils literal"><span class="pre">httpsProxy()</span></code></a>,
+<a class="reference internal" href="discover.html#simpletr64.Discover.discoverParticularHost" title="simpletr64.Discover.discoverParticularHost"><code class="xref py py-meth docutils literal"><span class="pre">discoverParticularHost()</span></code></a></p>
+</div>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="simpletr64.DeviceTR64">
+<em class="property">class </em><code class="descclassname">simpletr64.</code><code class="descname">DeviceTR64</code><span class="sig-paren">(</span><em>hostname</em>, <em>port=49000</em>, <em>protocol='http'</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64" title="Permalink to this definition">¶</a></dt>
+<dd><p>The basic class which represents an UPnP device.</p>
+<p>A device supports methods to gather information&#8217;s about a hardware device and to execute actions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.deviceInformationUnknownKeys">
+<code class="descname">deviceInformationUnknownKeys</code><a class="headerlink" href="#simpletr64.DeviceTR64.deviceInformationUnknownKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all device information&#8217;s which are very specific to this device, if loaded with
+<a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before.</p>
+<p>If the device definitions have been loaded this methods returns all parsed device information&#8217;s which
+are not standard conform and very specific to the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">device specific information&#8217;s</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, str]</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.deviceInformations" title="simpletr64.DeviceTR64.deviceInformations"><code class="xref py py-meth docutils literal"><span class="pre">deviceInformations()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.deviceInformations">
+<code class="descname">deviceInformations</code><a class="headerlink" href="#simpletr64.DeviceTR64.deviceInformations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all device informations if loaded before.</p>
+<p>If the device definitions have been loaded with <a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before
+this methods returns all parsed device information&#8217;s like device type, device model, manufacture, etc, is empty
+if device information&#8217;s have not been loaded before.</p>
+<p>Some examples of known information keys:</p>
+<p><code class="docutils literal"><span class="pre">deviceType,</span> <span class="pre">manufacturer,</span> <span class="pre">manufacturerURL,</span> <span class="pre">modelDescription,</span> <span class="pre">modelName,</span> <span class="pre">modelNumber,</span> <span class="pre">serialNumber</span></code></p>
+<p>Not all keys needs to be present and can be extended any time, still it is a pre defined set and any unknown
+information type will be stored differently and can be obtained via
+<a class="reference internal" href="#simpletr64.DeviceTR64.deviceInformationUnknownKeys" title="simpletr64.DeviceTR64.deviceInformationUnknownKeys"><code class="xref py py-meth docutils literal"><span class="pre">deviceInformationUnknownKeys()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">device information&#8217;s</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, str]</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>,
+<a class="reference internal" href="#simpletr64.DeviceTR64.deviceInformationUnknownKeys" title="simpletr64.DeviceTR64.deviceInformationUnknownKeys"><code class="xref py py-meth docutils literal"><span class="pre">deviceInformationUnknownKeys()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.deviceSCPD">
+<code class="descname">deviceSCPD</code><a class="headerlink" href="#simpletr64.DeviceTR64.deviceSCPD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the loaded SCPD (Service Control Protocol Document)/action definitions.</p>
+<p>Returns all action definitions which have been loaded before with <a class="reference internal" href="#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>.
+The action definitions are usefull to understand what kind of interaction functionality a device supports.</p>
+<p>The result is structured in the following way:</p>
+<div class="highlight-python"><div class="highlight"><pre>{ &quot;&lt;actionName&gt;&quot;: { &quot;inParameter&quot;: {&quot;name&quot;: &lt;&gt;, &quot;variable&quot;: &lt;&gt;, &quot;dataType&quot;: &lt;&gt;, &quot;defaultValue&quot;: &lt;&gt;},
+                    &quot;outParameter&quot;: {&quot;name&quot;: &lt;&gt;, &quot;variable&quot;: &lt;&gt;, &quot;dataType&quot;: &lt;&gt;, &quot;defaultValue&quot;: &lt;&gt;} } }
+</pre></div>
+</div>
+<p>The following keys are optional: <code class="docutils literal"><span class="pre">inParameter,</span> <span class="pre">outParameter,</span> <span class="pre">variable,</span> <span class="pre">defaultValue</span></code></p>
+<p>Parameter keys:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">name</span></code>: the name of the parameter</li>
+<li><code class="docutils literal"><span class="pre">variable</span></code>: an optional name to a virtual variable</li>
+<li><code class="docutils literal"><span class="pre">dataType</span></code>: the data type of this parameter, these are not fixed and depend on the schema and device vendor</li>
+<li><code class="docutils literal"><span class="pre">defaultValue</span></code>: an optional default value for this parameter</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the loaded action definitions or empty dict if not loaded</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, dict[str, dict[str, str]]]</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.deviceServiceDefinitions">
+<code class="descname">deviceServiceDefinitions</code><a class="headerlink" href="#simpletr64.DeviceTR64.deviceServiceDefinitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all known services and dedicated URI&#8217;s if loaded before.</p>
+<p>If the device definitions have been loaded with <a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>
+before this returns all the known service types, otherwise the dict will be empty. The returned dictionary maps
+from a service to an other dictionary which contains usually
+<code class="docutils literal"><span class="pre">controlURL</span></code>, <code class="docutils literal"><span class="pre">scpdURL</span></code> and optional <code class="docutils literal"><span class="pre">eventSubURL</span></code>:</p>
+<ul>
+<li><p class="first">The <code class="docutils literal"><span class="pre">controlURL</span></code> is needed to execute an action in the given service type/namespace.</p>
+</li>
+<li><dl class="first docutils">
+<dt>The <code class="docutils literal"><span class="pre">scpdURL</span></code> is a link to an other XML which defines usually the actions for this service type. These</dt>
+<dd><p class="first last">will be used if <a class="reference internal" href="#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a> is called.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">The <code class="docutils literal"><span class="pre">eventSubURL</span></code> is optional and can be used to subscribe to certain events, not supported by this lib yet.</p>
+</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the service type informations of this device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[dict[str, str]]</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.execute" title="simpletr64.DeviceTR64.execute"><code class="xref py py-meth docutils literal"><span class="pre">execute()</span></code></a>,
+<a class="reference internal" href="#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DeviceTR64.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>uri</em>, <em>namespace</em>, <em>action</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a given action with optional arguments.</p>
+<p>The execution of an action of an UPnP/TR64 device needs more than just the name of an action. It needs the
+control URI which is called to place the action and also the namespace aka service type is needed. The
+namespace defines the scope or service type of the given action, the same action name can appear in different
+namespaces.</p>
+<p>The way how to obtain the needed information&#8217;s is either through the documentation of the vendor of the
+device. Or through a discovery requests which return&#8217;s the URL to the root device description XML.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the control URI, for example <code class="docutils literal"><span class="pre">/upnp/control/hosts</span></code></li>
+<li><strong>namespace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the namespace for the given action, for example <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code></li>
+<li><strong>action</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the name of the action to call, for example <code class="docutils literal"><span class="pre">GetGenericHostEntry</span></code></li>
+<li><strong>kwargs</strong> (<em>dict[str, str]</em>) &#8211; optional arguments for the given action, depends if the action needs parameter. The arguments
+are given as dict where the key is the parameter name and the value the value of the parameter.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">returns the results of the action, if any. The results are structured as dict where the key is the
+name of the result argument and the value is the value of the result.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">dict[str,str]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ValueError</strong> &#8211; if parameters are not set correctly</li>
+<li><strong>HTTPError</strong> &#8211; if connection issues</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">device</span> <span class="o">=</span> <span class="n">DeviceTR64</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;/upnp/control/hosts&quot;</span><span class="p">,</span> <span class="s">&quot;urn:dslforum-org:service:Hosts:1&quot;</span><span class="p">,</span>
+    <span class="s">&quot;GetGenericHostEntry&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;NewIndex&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="p">{</span><span class="s">&#39;NewActive&#39;</span><span class="p">:</span> <span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;NewIPAddress&#39;</span><span class="p">:</span> <span class="s">&#39;192.168.0.23&#39;</span><span class="p">,</span> <span class="s">&#39;NewMACAddress&#39;</span><span class="p">:</span> <span class="s">&#39;9C:20:7B:E7:FF:5F&#39;</span><span class="p">,</span>
+    <span class="s">&#39;NewInterfaceType&#39;</span><span class="p">:</span> <span class="s">&#39;Ethernet&#39;</span><span class="p">,</span> <span class="s">&#39;NewHostName&#39;</span><span class="p">:</span> <span class="s">&#39;Apple-TV&#39;</span><span class="p">,</span> <span class="s">&#39;NewAddressSource&#39;</span><span class="p">:</span> <span class="s">&#39;DHCP&#39;</span><span class="p">,</span>
+    <span class="s">&#39;NewLeaseTimeRemaining&#39;</span><span class="p">:</span> <span class="s">&#39;0&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><a class="reference external" href="http://www.upnp-hacks.org/upnp.html">Additional short explanation of the UPnP protocol</a></p>
+<p class="last"><a class="reference internal" href="discover.html#simpletr64.Discover" title="simpletr64.Discover"><code class="xref py py-class docutils literal"><span class="pre">Discover</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>,
+<a class="reference internal" href="#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DeviceTR64.getControlURL">
+<code class="descname">getControlURL</code><span class="sig-paren">(</span><em>serviceType</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.getControlURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the control URL for a given service type.</p>
+<p>When the device definitions have been loaded with <a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> this
+method returns for a given service type/namespace the associated control URL. If the device definitions have
+not been loaded a default value can be given which gets returned instead. The control URL is used to
+execute actions for a dedicated service type/namespace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>serviceType</strong> &#8211; the service type to look up for</li>
+<li><strong>default</strong> (<em>str or None</em>) &#8211; the default return value in case the service type is not found and device definitions are not
+loaded</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the URL/URI</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">str or None</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">if the device did load device definitions and the service type is not known.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DeviceTR64.getEventSubURL">
+<code class="descname">getEventSubURL</code><span class="sig-paren">(</span><em>serviceType</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.getEventSubURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the event URL for a given service type.</p>
+<p>When the device definitions have been loaded with <a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> this
+method returns for a given service type/namespace the associated event URL. If the device definitions have
+not been loaded a default value can be given which gets returned instead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>serviceType</strong> &#8211; the service type to look up for</li>
+<li><strong>default</strong> (<em>str or None</em>) &#8211; the default return value in case the service type is not found and device definitions are not
+loaded</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the URL/URI</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">str or None</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">if the device did load device definitions and the service type is not known.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DeviceTR64.getSCDPURL">
+<code class="descname">getSCDPURL</code><span class="sig-paren">(</span><em>serviceType</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.getSCDPURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the SCDP (Service Control Protocol Document) URL for a given service type.</p>
+<p>When the device definitions have been loaded with <a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> this
+method returns for a given service type/namespace the associated URL to the SCDP. If the device definitions
+have not been loaded a default value can be given which gets returned instead. The SCDP specifies all the
+interaction functionality a device provides.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>serviceType</strong> &#8211; the service type to look up for</li>
+<li><strong>default</strong> (<em>str or None</em>) &#8211; the default return value in case the service type is not found and device definitions are not
+loaded</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the URL/URI</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">str or None</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">if the device did load device definitions and the service type is not known.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.host">
+<code class="descname">host</code><a class="headerlink" href="#simpletr64.DeviceTR64.host" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the hostname of this device which was given when instantiated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the hostname or ip address of this device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.httpProxy">
+<code class="descname">httpProxy</code><a class="headerlink" href="#simpletr64.DeviceTR64.httpProxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to get and set the URL to the http proxy which gets used for any http requests.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>proxy</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the http proxy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">device</span> <span class="o">=</span> <span class="n">DeviceTR64</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">device</span><span class="o">.</span><span class="n">httpProxy</span><span class="p">(</span><span class="s">&quot;http://localhost:8888/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.httpsProxy">
+<code class="descname">httpsProxy</code><a class="headerlink" href="#simpletr64.DeviceTR64.httpsProxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to get and set the URL to the https proxy which gets used for any https requests.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>proxy</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the https proxy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">device</span> <span class="o">=</span> <span class="n">DeviceTR64</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">device</span><span class="o">.</span><span class="n">httpsProxy</span><span class="p">(</span><span class="s">&quot;https://localhost:8889/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DeviceTR64.loadDeviceDefinitions">
+<code class="descname">loadDeviceDefinitions</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the device definitions from a given URL which points to the root XML in the device.</p>
+<p>This loads the device definitions which is needed in case you like to:</p>
+<ul class="simple">
+<li>get additional information&#8217;s about the device like manufacture, device type, etc</li>
+<li>get all support service types of this device</li>
+<li>use the convenient actions classes part of this library in the actions module</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>urlOfXMLDefinition</strong> &#8211; the URL to the root XML which sets the device definitions.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">if the XML could not be parsed correctly</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.deviceServiceDefinitions" title="simpletr64.DeviceTR64.deviceServiceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">deviceServiceDefinitions()</span></code></a>,
+<a class="reference internal" href="#simpletr64.DeviceTR64.deviceInformations" title="simpletr64.DeviceTR64.deviceInformations"><code class="xref py py-meth docutils literal"><span class="pre">deviceInformations()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.deviceSCPD" title="simpletr64.DeviceTR64.deviceSCPD"><code class="xref py py-meth docutils literal"><span class="pre">deviceSCPD()</span></code></a>,
+<a class="reference internal" href="#simpletr64.DeviceTR64.getSCDPURL" title="simpletr64.DeviceTR64.getSCDPURL"><code class="xref py py-meth docutils literal"><span class="pre">getSCDPURL()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.getControlURL" title="simpletr64.DeviceTR64.getControlURL"><code class="xref py py-meth docutils literal"><span class="pre">getControlURL()</span></code></a>,
+<a class="reference internal" href="#simpletr64.DeviceTR64.getEventSubURL" title="simpletr64.DeviceTR64.getEventSubURL"><code class="xref py py-meth docutils literal"><span class="pre">getEventSubURL()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DeviceTR64.loadSCPD">
+<code class="descname">loadSCPD</code><span class="sig-paren">(</span><em>serviceType=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadSCPD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load action definition(s) (Service Control Protocol Document).</p>
+<p>If the device definitions have been loaded via loadDeviceDefinitions() this method loads actions definitions.
+The action definitions are needed if you like to execute an action on a UPnP device. The actions definition
+contains the name of the action, the input and output parameter. You use the definition either with
+execute() or with the actions module of this library which predefines a lot of actions based on the TR64
+standard.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
+types if None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueType:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">if the given serviceType is not known or when the definition can not be loaded.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="#simpletr64.DeviceTR64.deviceSCPD" title="simpletr64.DeviceTR64.deviceSCPD"><code class="xref py py-meth docutils literal"><span class="pre">deviceSCPD()</span></code></a>,
+<a class="reference internal" href="tr64.html"><em>TR 64 Protocol Actions</em></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.password">
+<code class="descname">password</code><a class="headerlink" href="#simpletr64.DeviceTR64.password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to set and get the password which gets used to authenticate, if empty it will not be used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.port">
+<code class="descname">port</code><a class="headerlink" href="#simpletr64.DeviceTR64.port" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the port of this device which was given when instantiated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the port of this device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.protocol">
+<code class="descname">protocol</code><a class="headerlink" href="#simpletr64.DeviceTR64.protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the protocol to communicate with this device which was given when instantiated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the communication protocol of this device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.DeviceTR64.setupTR64Device">
+<code class="descname">setupTR64Device</code><span class="sig-paren">(</span><em>deviceType</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.setupTR64Device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup actions for known devices.</p>
+<p>For convenience reasons for some devices there is no need to discover/load device definitions before the
+pre defined <a class="reference internal" href="tr64.html"><em>TR 64 Protocol Actions</em></a> can be used.</p>
+<p>The following devices are currently supported (please help to extend):</p>
+<ul class="simple">
+<li>fritz.box - Any AVM Fritz Box with the latest software version installed</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deviceType</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; a known device type</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">if the device type is not known.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="tr64.html"><em>TR 64 Protocol Actions</em></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.DeviceTR64.username">
+<code class="descname">username</code><a class="headerlink" href="#simpletr64.DeviceTR64.username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to set and get the username which gets used to authenticate, can be empty.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tr64.html" title="TR 64 Protocol Actions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="discover.html" title="Discover UPnP Devices"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Benjamin Pannier.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+    </div>
+  </body>
+</html>

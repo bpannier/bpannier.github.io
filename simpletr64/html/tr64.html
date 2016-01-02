@@ -1,0 +1,2021 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TR 64 Protocol Actions &mdash; Simple TR64 UPnP 1.01 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.01',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="Simple TR64 UPnP 1.01 documentation" href="index.html" />
+    <link rel="prev" title="Device Interaction" href="devices.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="devices.html" title="Device Interaction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TR 64 Protocol Actions</a><ul>
+<li><a class="reference internal" href="#supported-devices">Supported devices</a></li>
+<li><a class="reference internal" href="#not-out-of-the-box-supported-devices">Not out of the box supported devices</a></li>
+<li><a class="reference internal" href="#system-classes">System Classes</a></li>
+<li><a class="reference internal" href="#lan-classes">LAN Classes</a></li>
+<li><a class="reference internal" href="#wan-classes">WAN Classes</a></li>
+<li><a class="reference internal" href="#wifi-classes">Wifi Classes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="devices.html"
+                        title="previous chapter">Device Interaction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tr64.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tr-64-protocol-actions">
+<span id="tr64"></span><h1>TR 64 Protocol Actions<a class="headerlink" href="#tr-64-protocol-actions" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://www.broadband-forum.org/technical/download/TR-064.pdf">TR 64</a> is a protocol designed to communicate with
+devices which provides Internet connectivity like DSL or cable routers, also several Wifi routers do support it. The
+protocol is based on the UPnP standard, it just adds several service types and actions how to configure and monitor
+a device.</p>
+<p>The <a class="reference internal" href="devices.html#simpletr64.DeviceTR64" title="simpletr64.DeviceTR64"><code class="xref py py-class docutils literal"><span class="pre">DeviceTR64</span></code></a> provides all functionality already to gather information&#8217;s and to interact with
+a TR64 device. Also this module adds some convenience to be able to execute actions on a device which supports TR64. If
+the device is supported already only <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called otherwise some
+more magic needs to happen, please see the following sections.</p>
+<p>Be aware that you might need to authenticate yourself before you can use some actions,
+please see <a class="reference internal" href="devices.html#authentication"><span>here</span></a>.</p>
+<div class="section" id="supported-devices">
+<h2>Supported devices<a class="headerlink" href="#supported-devices" title="Permalink to this headline">¶</a></h2>
+<p>Today only one device type will be supported out of the box, also other devices can use this module, just continue to
+read:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>AVM - Fritz.boxes are supported when they have the latest software installed and UPnP enabled in the Web interface</dt>
+<dd><p class="first last">(Heimnetz - Netzwerkeinstellungen / Zugriff für Anwendungen zulassen &amp; Statusinformationen über UPnP)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>I appreciate any help to extend the amount of supported devices, please see next section.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">DeviceTR64</span><span class="p">(</span><span class="s">&quot;fritz.box&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span><span class="o">.</span><span class="n">setupTR64Device</span><span class="p">(</span><span class="s">&quot;fritz.box&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">getSystemInfo</span><span class="p">()</span><span class="o">.</span><span class="n">manufactureName</span><span class="p">)</span>
+<span class="go">&quot;AVM&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="not-out-of-the-box-supported-devices">
+<h2>Not out of the box supported devices<a class="headerlink" href="#not-out-of-the-box-supported-devices" title="Permalink to this headline">¶</a></h2>
+<p>Even when your device is not supported out of the box you can use the convenient way to access TR64 actions. Unless
+you have the URL to the device definitions you have to run a discover process and load the device definitions before
+you can use the defined methods in this module.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">Discover</span><span class="o">.</span><span class="n">discover</span><span class="p">()</span>
+<span class="go"># ... choose the result for your device, lets assume it would be the very first one</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">Discover</span><span class="o">.</span><span class="n">discoverParticularHost</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">locationHost</span><span class="p">)</span>
+<span class="go"># ... save the result, so that you can skip the calls before next time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">DeviceTR64</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">locationHost</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">locationPort</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">locationProtocol</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span><span class="o">.</span><span class="n">loadDeviceDefinitions</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">location</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">getSystemInfo</span><span class="p">()</span><span class="o">.</span><span class="n">manufactureName</span><span class="p">)</span>
+<span class="go">&quot;&lt;manufacture name&gt;&quot;</span>
+</pre></div>
+</div>
+<p>If you like to support the effort to improve this library and your device is not supported out of the box, please
+send me the output of the following script execution:</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; python tools/gather_device_upnp_info.py &lt;name or IP of the device&gt;
+</pre></div>
+</div>
+<p>Please, send me the output via E-mail to: <code class="docutils literal"><span class="pre">sourcecode&#64;ka.ro</span></code></p>
+</div>
+<div class="section" id="system-classes">
+<h2>System Classes<a class="headerlink" href="#system-classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="simpletr64.actions.System">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">System</code><span class="sig-paren">(</span><em>deviceTR64</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to get various System information&#8217;s of a device which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:DeviceInfo:1</span></code>
+and <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Time:1</span></code>.</p>
+<p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Time:1</span></code> and
+<code class="docutils literal"><span class="pre">urn:dslforum-org:service:DeviceInfo:1</span></code>
+namespace. Unless the device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods. For a Fritz.box
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might not
+support all of the actions. This class does not implement all of the actions of this namespace, please check the
+SCPD definitions if you miss some functionality. This library provides some tools to gather the needed
+information&#8217;s.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>,
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
+<p class="last">The tools which have been provided with this library shows good use of the full library.</p>
+</div>
+<dl class="method">
+<dt id="simpletr64.actions.System.getSystemInfo">
+<code class="descname">getSystemInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getSystemInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetInfo action to get information&#8217;s about the System on the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">information&#8217;s about the System on the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.SystemInfo" title="simpletr64.actions.SystemInfo">SystemInfo</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.System.getTimeInfo">
+<code class="descname">getTimeInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getTimeInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetInfo action to get information&#8217;s about the time on the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">information&#8217;s about the time on the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.TimeInfo" title="simpletr64.actions.TimeInfo">TimeInfo</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.System.reboot">
+<code class="descname">reboot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.reboot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reboot the device</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.SystemInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">SystemInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.SystemInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for System information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.description">
+<code class="descname">description</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a description of the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a description of the device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.hwVersion">
+<code class="descname">hwVersion</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.hwVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the hardware version of the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the hardware version of the system.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.log">
+<code class="descname">log</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last lines in the log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the last lines in the log file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.manufactureName">
+<code class="descname">manufactureName</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.manufactureName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the manufacture of the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the name of the manufacture of the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.modelName">
+<code class="descname">modelName</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.modelName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the model of the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the name of the model of the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.serialNumber">
+<code class="descname">serialNumber</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.serialNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the serial number of the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the serial number of the system.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.softwareVersion">
+<code class="descname">softwareVersion</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.softwareVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the software version of the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the software version of the system.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.SystemInfo.uptime">
+<code class="descname">uptime</code><a class="headerlink" href="#simpletr64.actions.SystemInfo.uptime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the uptime of the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the uptime of the system.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.TimeInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">TimeInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.TimeInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for time information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.currentLocalTime">
+<code class="descname">currentLocalTime</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.currentLocalTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return current local time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">current local time.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.daylightSavingEnd">
+<code class="descname">daylightSavingEnd</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.daylightSavingEnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return when the day light saving time ends.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">when the day light saving time ends.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.daylightSavingStart">
+<code class="descname">daylightSavingStart</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.daylightSavingStart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return when the day light saving time starts.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">when the day light saving time starts.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.isDaylightSaving">
+<code class="descname">isDaylightSaving</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.isDaylightSaving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if it is now day light saving time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if it is now day light saving time.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.localTimeZone">
+<code class="descname">localTimeZone</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.localTimeZone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the local time zone.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the local time zone.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.localTimeZoneName">
+<code class="descname">localTimeZoneName</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.localTimeZoneName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the local time zone.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the name of the local time zone.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.ntpServer1">
+<code class="descname">ntpServer1</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.ntpServer1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first configured NTP server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the first configured NTP server.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.ntpServer2">
+<code class="descname">ntpServer2</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.ntpServer2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the second configured NTP server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the second configured NTP server.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.TimeInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.TimeInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="lan-classes">
+<h2>LAN Classes<a class="headerlink" href="#lan-classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="simpletr64.actions.Lan">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">Lan</code><span class="sig-paren">(</span><em>deviceTR64</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to get various LAN information&#8217;s of a device which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code> and
+<code class="docutils literal"><span class="pre">urn:dslforum-org:service:LAN*</span></code>.</p>
+<p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:LAN*</span></code> and <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code>
+namespace. Unless the device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods.
+For a Fritz.box <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might
+not support all of the actions. This class does not implement all of the actions of this namespace, please
+check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
+needed information&#8217;s.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>,
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
+<p class="last">The tools which have been provided with this library shows good use of the full library.</p>
+</div>
+<dl class="method">
+<dt id="simpletr64.actions.Lan.getAmountOfHostsConnected">
+<code class="descname">getAmountOfHostsConnected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getAmountOfHostsConnected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute NewHostNumberOfEntries action to get the amount of known hosts.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the amount of known hosts.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.actions.Lan.getHostDetailsByIndex" title="simpletr64.actions.Lan.getHostDetailsByIndex"><code class="xref py py-meth docutils literal"><span class="pre">getHostDetailsByIndex()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Lan.getEthernetInfo">
+<code class="descname">getEthernetInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetInfo action to get information&#8217;s about the Ethernet interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">information&#8217;s about the Ethernet interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetInfo" title="simpletr64.actions.EthernetInfo">EthernetInfo</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Lan.getEthernetStatistic">
+<code class="descname">getEthernetStatistic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetStatistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetStatistics action to get statistics of the Ethernet interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">statisticss of the Ethernet interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetStatistic" title="simpletr64.actions.EthernetStatistic">EthernetStatistic</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Lan.getHostDetailsByIndex">
+<code class="descname">getHostDetailsByIndex</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetGenericHostEntry action to get detailed information&#8217;s of a connected host.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> &#8211; the index of the host</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the detailed information&#8217;s of a connected host.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.HostDetails" title="simpletr64.actions.HostDetails">HostDetails</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.actions.Lan.getAmountOfHostsConnected" title="simpletr64.actions.Lan.getAmountOfHostsConnected"><code class="xref py py-meth docutils literal"><span class="pre">getAmountOfHostsConnected()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Lan.getHostDetailsByMACAddres">
+<code class="descname">getHostDetailsByMACAddres</code><span class="sig-paren">(</span><em>macAddress</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByMACAddres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get host details for a host specified by its MAC address.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>macAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MAC address in the form <code class="docutils literal"><span class="pre">38:C9:86:26:7E:38</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">return the host details if found otherwise an Exception will be raised</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.HostDetails" title="simpletr64.actions.HostDetails">HostDetails</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.EthernetStatistic">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">EthernetStatistic</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.EthernetStatistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for Ethernet interface statistics.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetStatistic.bytesReceived">
+<code class="descname">bytesReceived</code><a class="headerlink" href="#simpletr64.actions.EthernetStatistic.bytesReceived" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the amount of bytes which have been received.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the amount of bytes which have been received.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetStatistic.bytesSent">
+<code class="descname">bytesSent</code><a class="headerlink" href="#simpletr64.actions.EthernetStatistic.bytesSent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the amount of bytes which have been sent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the amount of bytes which have been sent.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetStatistic.packetsReceived">
+<code class="descname">packetsReceived</code><a class="headerlink" href="#simpletr64.actions.EthernetStatistic.packetsReceived" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the amount of packets which have been received.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the amount of packets which have been received.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetStatistic.packetsSent">
+<code class="descname">packetsSent</code><a class="headerlink" href="#simpletr64.actions.EthernetStatistic.packetsSent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the amount of packets which have been sent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the amount of packets which have been sent.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetStatistic.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.EthernetStatistic.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.EthernetInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">EthernetInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.EthernetInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for Ethernet interface information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetInfo.duplexMode">
+<code class="descname">duplexMode</code><a class="headerlink" href="#simpletr64.actions.EthernetInfo.duplexMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the Ethernet interface is in half or full duplex mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if the Ethernet interface is in half or full duplex mode.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetInfo.enabled">
+<code class="descname">enabled</code><a class="headerlink" href="#simpletr64.actions.EthernetInfo.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the interface is enabled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if the interface is enabled.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetInfo.macAddress">
+<code class="descname">macAddress</code><a class="headerlink" href="#simpletr64.actions.EthernetInfo.macAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the MAC address of the ethernet interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the MAC address of the ethernet interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetInfo.maxBitRate">
+<code class="descname">maxBitRate</code><a class="headerlink" href="#simpletr64.actions.EthernetInfo.maxBitRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the max bit rate of the interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the max bit rate of the interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.EthernetInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.EthernetInfo.status">
+<code class="descname">status</code><a class="headerlink" href="#simpletr64.actions.EthernetInfo.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the status of the interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the status of the interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.HostDetails">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">HostDetails</code><span class="sig-paren">(</span><em>results</em>, <em>macAddress=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.HostDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for information&#8217;s about a LAN connected host.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.active">
+<code class="descname">active</code><a class="headerlink" href="#simpletr64.actions.HostDetails.active" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the host is active.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if the host is active</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.hostname">
+<code class="descname">hostname</code><a class="headerlink" href="#simpletr64.actions.HostDetails.hostname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the host.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the name of the host.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.interface">
+<code class="descname">interface</code><a class="headerlink" href="#simpletr64.actions.HostDetails.interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the interface to which the host is connected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the interface to which the host is connected.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.ipaddress">
+<code class="descname">ipaddress</code><a class="headerlink" href="#simpletr64.actions.HostDetails.ipaddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the IP address of the host.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the IP address of the host.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.leasetime">
+<code class="descname">leasetime</code><a class="headerlink" href="#simpletr64.actions.HostDetails.leasetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the remaining lease time</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the remaining lease time</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.macAddress">
+<code class="descname">macAddress</code><a class="headerlink" href="#simpletr64.actions.HostDetails.macAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the MAC address of the host.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the MAC address of the host.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.HostDetails.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.HostDetails.source">
+<code class="descname">source</code><a class="headerlink" href="#simpletr64.actions.HostDetails.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the source where the address of this host was learned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the source where the address of this host was learned.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rtype str:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="wan-classes">
+<h2>WAN Classes<a class="headerlink" href="#wan-classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="simpletr64.actions.Wan">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">Wan</code><span class="sig-paren">(</span><em>deviceTR64</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to get various WAN information&#8217;s of a device which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WAN*</span></code>.</p>
+<p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WAN*</span> <span class="pre">namespace</span></code>. Unless the
+device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods. For a Fritz.box
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might
+not support all of the actions. This class does not implement all of the actions of this namespace, please
+check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
+needed information&#8217;s.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>,
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
+<p class="last">The tools which have been provided with this library shows good use of the full library.</p>
+</div>
+<dl class="method">
+<dt id="simpletr64.actions.Wan.getADSLInfo">
+<code class="descname">getADSLInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getADSLInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetInfo action to get basic ADSL information&#8217;s.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">ADSL informations.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ADSLInfo" title="simpletr64.actions.ADSLInfo">ADSLInfo</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wan.getByteStatistic">
+<code class="descname">getByteStatistic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getByteStatistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetTotalBytesSent&amp;GetTotalBytesReceived actions to get WAN statistics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total bytes sent and total bytes received</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wan.getConnectionInfo">
+<code class="descname">getConnectionInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getConnectionInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetInfo action to get WAN connection information&#8217;s.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">WAN connection information&#8217;s.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ConnectionInfo" title="simpletr64.actions.ConnectionInfo">ConnectionInfo</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wan.getEthernetLinkStatus">
+<code class="descname">getEthernetLinkStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getEthernetLinkStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetEthernetLinkStatus action to get the status of the ethernet link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">status of the ethernet link</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wan.getLinkInfo">
+<code class="descname">getLinkInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetInfo action to get basic WAN link information&#8217;s.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">basic WAN link information&#8217;s</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkInfo" title="simpletr64.actions.WanLinkInfo">WanLinkInfo</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wan.getLinkProperties">
+<code class="descname">getLinkProperties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetCommonLinkProperties action to get WAN link properties.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">WAN link properties</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkProperties" title="simpletr64.actions.WanLinkProperties">WanLinkProperties</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wan.getPacketStatistic">
+<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetTotalPacketsSent&amp;GetTotalPacketsReceived actions to get WAN statistics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.WanLinkInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">WanLinkInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.WanLinkInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for WAN link information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.dataPath">
+<code class="descname">dataPath</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.dataPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return .... what</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.downStreamCurrentRate">
+<code class="descname">downStreamCurrentRate</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.downStreamCurrentRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current downstream rate of the WAN link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the current downstream rate of the WAN link.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.downstreamMaxRate">
+<code class="descname">downstreamMaxRate</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.downstreamMaxRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximal downstream rate of the WAN link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the maximal downstream rate of the WAN link.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.enabled">
+<code class="descname">enabled</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the WAN link is enabled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if the WAN link is enabled.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.status">
+<code class="descname">status</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the WAN link status.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the WAN link status.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.upstreamCurrentRate">
+<code class="descname">upstreamCurrentRate</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.upstreamCurrentRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current upstream rate of the WAN link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the current upstream rate of the WAN link.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkInfo.upstreamMaxRate">
+<code class="descname">upstreamMaxRate</code><a class="headerlink" href="#simpletr64.actions.WanLinkInfo.upstreamMaxRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximal upstream rate of the WAN link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the maximal upstream rate of the WAN link.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.ADSLInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">ADSLInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.ADSLInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for ADSL link information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.ADSLInfo.destinationAddress">
+<code class="descname">destinationAddress</code><a class="headerlink" href="#simpletr64.actions.ADSLInfo.destinationAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the destination address of the ADSL interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the destination address of the ADSL interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ADSLInfo.enabled">
+<code class="descname">enabled</code><a class="headerlink" href="#simpletr64.actions.ADSLInfo.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the ADSL interface is enabled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if the ADSL interface is enabled.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ADSLInfo.linkType">
+<code class="descname">linkType</code><a class="headerlink" href="#simpletr64.actions.ADSLInfo.linkType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the link type for the ADSL interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Return the link type for the ADSL interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ADSLInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.ADSLInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ADSLInfo.status">
+<code class="descname">status</code><a class="headerlink" href="#simpletr64.actions.ADSLInfo.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the status for the ADSL interface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the status for the ADSL interface.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.WanLinkProperties">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">WanLinkProperties</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.WanLinkProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for WAN link properties.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkProperties.accessType">
+<code class="descname">accessType</code><a class="headerlink" href="#simpletr64.actions.WanLinkProperties.accessType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the access type of the WAN link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the access type of the WAN link.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkProperties.downstreamMaxBitRate">
+<code class="descname">downstreamMaxBitRate</code><a class="headerlink" href="#simpletr64.actions.WanLinkProperties.downstreamMaxBitRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum bit rate for the downstream on this WAN link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the maximum bit rate for the downstream on this WAN link.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkProperties.linkStatus">
+<code class="descname">linkStatus</code><a class="headerlink" href="#simpletr64.actions.WanLinkProperties.linkStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the WAN link status.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the WAN link status.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkProperties.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.WanLinkProperties.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WanLinkProperties.upstreamMaxBitRate">
+<code class="descname">upstreamMaxBitRate</code><a class="headerlink" href="#simpletr64.actions.WanLinkProperties.upstreamMaxBitRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum bit rate for the upstream on this WAN link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the maximum bit rate for the upstream on this WAN link.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.ConnectionInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">ConnectionInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.ConnectionInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for WAN connection information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.connectionType">
+<code class="descname">connectionType</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.connectionType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the type of the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the type of the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.dnsEnabled">
+<code class="descname">dnsEnabled</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.dnsEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if DNS is enabled for the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if DNS is enabled for the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.dnsServers">
+<code class="descname">dnsServers</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.dnsServers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of DNS servers for the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the list of DNS servers for the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.enabled">
+<code class="descname">enabled</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if WAN connection is enabled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if WAN connection is enabled.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.externalIPaddress">
+<code class="descname">externalIPaddress</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.externalIPaddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the external IP address of the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the external IP address of the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.lastConnectionError">
+<code class="descname">lastConnectionError</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.lastConnectionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last connection error of the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the last connection error of the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.macAddress">
+<code class="descname">macAddress</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.macAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the MAC address of the WAN device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the MAC address of the WAN device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.name">
+<code class="descname">name</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the name of the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.natEnabled">
+<code class="descname">natEnabled</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.natEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if NAT is enabled for the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if NAT is enabled for the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.status">
+<code class="descname">status</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the status of the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the status of the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.type">
+<code class="descname">type</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the type of the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the type of the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.ConnectionInfo.uptime">
+<code class="descname">uptime</code><a class="headerlink" href="#simpletr64.actions.ConnectionInfo.uptime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the uptime of the WAN connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the uptime of the WAN connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="wifi-classes">
+<h2>Wifi Classes<a class="headerlink" href="#wifi-classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="simpletr64.actions.Wifi">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">Wifi</code><span class="sig-paren">(</span><em>deviceTR64</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to get Wifi information&#8217;s of a device which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WLANConfiguration:X</span></code>.</p>
+<p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WLANConfiguration:X</span></code> namespace. Unless the
+device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods. For a Fritz.box
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might
+not support all of the actions. This class does not implement all of the actions of this namespace, please
+check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
+needed information&#8217;s.</p>
+<p>All Wifi actions ask for a device id, this depends on the device if the counting starts with 0 or 1. Often a device
+supports more than one device as for example to support 2.4 and 5 Ghz.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>,
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
+<p class="last">The tools which have been provided with this library shows good use of the full library.</p>
+</div>
+<dl class="method">
+<dt id="simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo">
+<code class="descname">getGenericAssociatedDeviceInfo</code><span class="sig-paren">(</span><em>wifiDeviceId</em>, <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetGenericAssociatedDeviceInfo action to get detailed information about a Wifi client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</li>
+<li><strong>index</strong> &#8211; the number of the client</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the detailed information&#8217;s about a Wifi client</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.WifiDeviceInfo" title="simpletr64.actions.WifiDeviceInfo">WifiDeviceInfo</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.actions.Wifi.getTotalAssociations" title="simpletr64.actions.Wifi.getTotalAssociations"><code class="xref py py-meth docutils literal"><span class="pre">getTotalAssociations()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wifi.getPacketStatistic">
+<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetPacketStatistics action to get Wifi statistics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wifi.getStatistic">
+<code class="descname">getStatistic</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getStatistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetStatistics action to get Wifi statistics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wifi.getTotalAssociations">
+<code class="descname">getTotalAssociations</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getTotalAssociations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetTotalAssociations action to get the amount of associated Wifi clients.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the amount of Wifi clients</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo" title="simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo"><code class="xref py py-meth docutils literal"><span class="pre">getGenericAssociatedDeviceInfo()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wifi.getWifiInfo">
+<code class="descname">getWifiInfo</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getWifiInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetInfo action to get Wifi basic information&#8217;s.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the basic informations</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WifiBasicInfo" title="simpletr64.actions.WifiBasicInfo">WifiBasicInfo</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.WifiDeviceInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">WifiDeviceInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.WifiDeviceInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for Wifi device information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiDeviceInfo.authenticated">
+<code class="descname">authenticated</code><a class="headerlink" href="#simpletr64.actions.WifiDeviceInfo.authenticated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if the client has been authenticated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if client is authenticated</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiDeviceInfo.ipAddress">
+<code class="descname">ipAddress</code><a class="headerlink" href="#simpletr64.actions.WifiDeviceInfo.ipAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the IP address</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the IP address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiDeviceInfo.macAddress">
+<code class="descname">macAddress</code><a class="headerlink" href="#simpletr64.actions.WifiDeviceInfo.macAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mac address</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the mac address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiDeviceInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.WifiDeviceInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="simpletr64.actions.WifiBasicInfo">
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">WifiBasicInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for Wifi client information&#8217;s.</p>
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.authMode">
+<code class="descname">authMode</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.authMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the authentication mode for the Wifi client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the authentication mode for the Wifi client</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.beaconType">
+<code class="descname">beaconType</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.beaconType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return ... what ever</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.bssid">
+<code class="descname">bssid</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.bssid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the BSS id.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the bss id.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.channel">
+<code class="descname">channel</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the used Wifi channel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the used Wifi channel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.enabled">
+<code class="descname">enabled</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if the Wifi client is enabled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if client is enabled.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.encryptionMode">
+<code class="descname">encryptionMode</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.encryptionMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the encryption mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the encryption mode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.macControl">
+<code class="descname">macControl</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.macControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if mac control is activated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if mac control is activated</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.raw">
+<code class="descname">raw</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the raw results which have been used to initialize the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str,str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.ssid">
+<code class="descname">ssid</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.ssid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the SSID for the given Wifi client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the SSID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.standard">
+<code class="descname">standard</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.standard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return ... what ever</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="simpletr64.actions.WifiBasicInfo.status">
+<code class="descname">status</code><a class="headerlink" href="#simpletr64.actions.WifiBasicInfo.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the status for the Wifi client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the status for the client</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="devices.html" title="Device Interaction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple TR64 UPnP 1.01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Benjamin Pannier.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+    </div>
+  </body>
+</html>
