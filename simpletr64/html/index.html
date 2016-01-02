@@ -51,9 +51,9 @@
   <ul>
 <li><a class="reference internal" href="#">Simple TR64 UPnP</a><ul>
 <li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
   <h4>Next topic</h4>
@@ -90,9 +90,16 @@
   <div class="section" id="simple-tr64-upnp">
 <h1>Simple TR64 UPnP<a class="headerlink" href="#simple-tr64-upnp" title="Permalink to this headline">¶</a></h1>
 <p>Release v1.0. (<a class="reference internal" href="install.html#install"><span>Installation</span></a>)</p>
+<hr class="docutils" />
 <p>This library supports the discovery of UPnP devices in the local network and let you execute actions on them if
-the device supports them. Also it contains a convenient way to execute TR64 protocol actions on route or other network
+the device supports them. Also it contains a convenient way to execute TR64 protocol actions on routers or other network
 devices which supports TR64.</p>
+<p><a class="reference external" href="https://www.broadband-forum.org/technical/download/TR-064.pdf">TR 64</a> is a protocol designed to communicate with
+devices which provides Internet connectivity like DSL or cable routers, also several Wifi routers do support it. The
+protocol is based on the UPnP standard, it just adds several service types and actions how to configure and monitor
+a device.</p>
+<p>What I do with this library is to check regularly if certain Wifi devices are online as my Home-automation is based
+on profiles if someone is at home or not.</p>
 <p>Discover and execute:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">simpletr64</span><span class="o">.</span><span class="n">discover</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -113,6 +120,8 @@ devices which supports TR64.</p>
 <span class="go">&quot;AVM&quot;</span>
 </pre></div>
 </div>
+<p>Also please see the <a class="reference external" href="https://github.com/bpannier/simpletr64/tree/master/simpletr64/tools">tools</a> which have been
+provided with this library, these demonstrates the full functionality.</p>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -145,13 +154,13 @@ devices which supports TR64.</p>
 </ul>
 </div>
 </div>
-</div>
 <div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
 </ul>
+</div>
 </div>
 
 
@@ -173,7 +182,7 @@ devices which supports TR64.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, Benjamin Pannier.
+        &copy; Copyright 2016, Benjamin Pannier.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
