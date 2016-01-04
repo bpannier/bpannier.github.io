@@ -354,7 +354,7 @@ from a service to an other dictionary which contains usually
 
 <dl class="method">
 <dt id="simpletr64.DeviceTR64.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>uri</em>, <em>namespace</em>, <em>action</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.execute" title="Permalink to this definition">¶</a></dt>
+<code class="descname">execute</code><span class="sig-paren">(</span><em>uri</em>, <em>namespace</em>, <em>action</em>, <em>timeout=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executes a given action with optional arguments.</p>
 <p>The execution of an action of an UPnP/TR64 device needs more than just the name of an action. It needs the
 control URI which is called to place the action and also the namespace aka service type is needed. The
@@ -370,6 +370,7 @@ device. Or through a discovery requests which return&#8217;s the URL to the root
 <li><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the control URI, for example <code class="docutils literal"><span class="pre">/upnp/control/hosts</span></code></li>
 <li><strong>namespace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the namespace for the given action, for example <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code></li>
 <li><strong>action</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the name of the action to call, for example <code class="docutils literal"><span class="pre">GetGenericHostEntry</span></code></li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 <li><strong>kwargs</strong> (<em>dict[str, str]</em>) &#8211; optional arguments for the given action, depends if the action needs parameter. The arguments
 are given as dict where the key is the parameter name and the value the value of the parameter.</li>
 </ul>
@@ -384,7 +385,8 @@ name of the result argument and the value is the value of the result.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
 <li><strong>ValueError</strong> &#8211; if parameters are not set correctly</li>
-<li><strong>HTTPError</strong> &#8211; if connection issues</li>
+<li><strong>requests.exceptions.ConnectionError</strong> &#8211; when the action can not be placed on the device</li>
+<li><strong>requests.exceptions.ConnectTimeout</strong> &#8211; when download time out</li>
 </ul>
 </td>
 </tr>
@@ -577,7 +579,7 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.DeviceTR64.loadDeviceDefinitions">
-<code class="descname">loadDeviceDefinitions</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="Permalink to this definition">¶</a></dt>
+<code class="descname">loadDeviceDefinitions</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em>, <em>timeout=3</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadDeviceDefinitions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads the device definitions from a given URL which points to the root XML in the device.</p>
 <p>This loads the device definitions which is needed in case you like to:</p>
 <ul class="simple">
@@ -589,10 +591,18 @@ loaded</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>urlOfXMLDefinition</strong> &#8211; the URL to the root XML which sets the device definitions.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the root XML which sets the device definitions.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">if the XML could not be parsed correctly</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ValueError</strong> &#8211; if the XML could not be parsed correctly</li>
+<li><strong>requests.exceptions.ConnectionError</strong> &#8211; when the device definitions can not be downloaded</li>
+<li><strong>requests.exceptions.ConnectTimeout</strong> &#8211; when download time out</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -607,7 +617,7 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.DeviceTR64.loadSCPD">
-<code class="descname">loadSCPD</code><span class="sig-paren">(</span><em>serviceType=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadSCPD" title="Permalink to this definition">¶</a></dt>
+<code class="descname">loadSCPD</code><span class="sig-paren">(</span><em>serviceType=None</em>, <em>timeout=3</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadSCPD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load action definition(s) (Service Control Protocol Document).</p>
 <p>If the device definitions have been loaded via loadDeviceDefinitions() this method loads actions definitions.
 The action definitions are needed if you like to execute an action on a UPnP device. The actions definition
@@ -618,11 +628,19 @@ standard.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
-types if None.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
+types if None.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueType:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">if the given serviceType is not known or when the definition can not be loaded.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ValueType</strong> &#8211; if the given serviceType is not known or when the definition can not be loaded.</li>
+<li><strong>requests.exceptions.ConnectionError</strong> &#8211; when the scpd can not be downloaded</li>
+<li><strong>requests.exceptions.ConnectTimeout</strong> &#8211; when download time out</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>

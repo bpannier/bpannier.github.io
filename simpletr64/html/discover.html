@@ -167,7 +167,7 @@ you are looking for you should set it as some devices do not respond or respond 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>service</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the service type of devices you look for</li>
+<li><strong>service</strong> (<em>str or list[str]</em>) &#8211; the service type or list of service types of devices you look for</li>
 <li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the socket timeout for each try</li>
 <li><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; how often should be a discovery request send</li>
 <li><strong>ipAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the multicast ip address to use</li>
@@ -214,7 +214,7 @@ strangely. This call is costly the result if any should be cached.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>host</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the host to find</li>
-<li><strong>service</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the service if known to search for</li>
+<li><strong>service</strong> (<em>str or list[str]</em>) &#8211; the service type or list of service types if known to search for</li>
 <li><strong>deviceDefinitionURL</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; if provided it is used to skip a first device discovery</li>
 <li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the time to wait for each retry</li>
 <li><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the amount of times how often the device is tried to discover</li>
@@ -231,8 +231,11 @@ strangely. This call is costly the result if any should be cached.</p>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#simpletr64.DiscoveryResponse" title="simpletr64.DiscoveryResponse">DiscoveryResponse</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">if problems with reading or parsing the xml device definition occurs</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ValueError</strong> &#8211; if problems with reading or parsing the xml device definition occurs</li>
+<li><strong>requests.exceptions.ConnectionError</strong> &#8211; when the device definitions can not be downloaded</li>
+<li><strong>requests.exceptions.ConnectTimeout</strong> &#8211; when download time out</li>
+</ul>
 </td>
 </tr>
 </tbody>
