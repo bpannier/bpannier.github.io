@@ -228,6 +228,24 @@ for each call. Please, see the dedicated methods documentation for how to specif
 <tbody valign="top">
 </tbody>
 </table>
+<dl class="staticmethod">
+<dt id="simpletr64.DeviceTR64.create">
+<em class="property">static </em><code class="descname">create</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory method to create a DeviceTR64 from an URL to the XML device definitions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new DeviceTR64 object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.DeviceTR64" title="simpletr64.DeviceTR64">DeviceTR64</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="simpletr64.DeviceTR64.deviceInformationUnknownKeys">
 <code class="descname">deviceInformationUnknownKeys</code><a class="headerlink" href="#simpletr64.DeviceTR64.deviceInformationUnknownKeys" title="Permalink to this definition">¶</a></dt>
@@ -617,7 +635,7 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.DeviceTR64.loadSCPD">
-<code class="descname">loadSCPD</code><span class="sig-paren">(</span><em>serviceType=None</em>, <em>timeout=3</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadSCPD" title="Permalink to this definition">¶</a></dt>
+<code class="descname">loadSCPD</code><span class="sig-paren">(</span><em>serviceType=None</em>, <em>timeout=3</em>, <em>ignoreFailures=False</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.DeviceTR64.loadSCPD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load action definition(s) (Service Control Protocol Document).</p>
 <p>If the device definitions have been loaded via loadDeviceDefinitions() this method loads actions definitions.
 The action definitions are needed if you like to execute an action on a UPnP device. The actions definition
@@ -632,6 +650,8 @@ standard.</p>
 <li><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
 types if None.</li>
 <li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>ignoreFailures</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; if set to true and serviceType is None any failure in the iteration of loading
+all SCPD will be ignored.</li>
 </ul>
 </td>
 </tr>

@@ -170,6 +170,24 @@ information&#8217;s.</p>
 <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
 <p class="last">The tools which have been provided with this library shows good use of the full library.</p>
 </div>
+<dl class="staticmethod">
+<dt id="simpletr64.actions.System.getServiceType">
+<em class="property">static </em><code class="descname">getServiceType</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getServiceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given method name return the service type which supports it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>method</strong> &#8211; the method name to lookup</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the service type or None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="simpletr64.actions.System.getSystemInfo">
 <code class="descname">getSystemInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getSystemInfo" title="Permalink to this definition">¶</a></dt>
@@ -527,6 +545,8 @@ For a Fritz.box <a class="reference internal" href="devices.html#simpletr64.Devi
 not support all of the actions. This class does not implement all of the actions of this namespace, please
 check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
 needed information&#8217;s.</p>
+<p>All LAN actions ask for a interface id, this depends on the device if the counting starts with 0 or 1.
+Sometimes a device may support more than one LAN interface.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p><a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>,
@@ -535,15 +555,17 @@ needed information&#8217;s.</p>
 </div>
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getAmountOfHostsConnected">
-<code class="descname">getAmountOfHostsConnected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getAmountOfHostsConnected" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getAmountOfHostsConnected</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getAmountOfHostsConnected" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute NewHostNumberOfEntries action to get the amount of known hosts.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the amount of known hosts.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the amount of known hosts.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
 </tr>
 </tbody>
 </table>
@@ -555,15 +577,17 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getEthernetInfo">
-<code class="descname">getEthernetInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getEthernetInfo</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get information&#8217;s about the Ethernet interface.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">information&#8217;s about the Ethernet interface.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetInfo" title="simpletr64.actions.EthernetInfo">EthernetInfo</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">information&#8217;s about the Ethernet interface.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetInfo" title="simpletr64.actions.EthernetInfo">EthernetInfo</a></td>
 </tr>
 </tbody>
 </table>
@@ -571,15 +595,17 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getEthernetStatistic">
-<code class="descname">getEthernetStatistic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getEthernetStatistic</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetStatistics action to get statistics of the Ethernet interface.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">statisticss of the Ethernet interface.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetStatistic" title="simpletr64.actions.EthernetStatistic">EthernetStatistic</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">statisticss of the Ethernet interface.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetStatistic" title="simpletr64.actions.EthernetStatistic">EthernetStatistic</a></td>
 </tr>
 </tbody>
 </table>
@@ -587,17 +613,23 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getHostDetailsByIndex">
-<code class="descname">getHostDetailsByIndex</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByIndex" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getHostDetailsByIndex</code><span class="sig-paren">(</span><em>index</em>, <em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByIndex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetGenericHostEntry action to get detailed information&#8217;s of a connected host.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> &#8211; the index of the host</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> &#8211; the index of the host</li>
+<li><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the detailed information&#8217;s of a connected host.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the detailed information&#8217;s of a connected host.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.HostDetails" title="simpletr64.actions.HostDetails">HostDetails</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.HostDetails" title="simpletr64.actions.HostDetails">HostDetails</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -609,17 +641,41 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getHostDetailsByMACAddress">
-<code class="descname">getHostDetailsByMACAddress</code><span class="sig-paren">(</span><em>macAddress</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByMACAddress" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getHostDetailsByMACAddress</code><span class="sig-paren">(</span><em>macAddress</em>, <em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByMACAddress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get host details for a host specified by its MAC address.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>macAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MAC address in the form <code class="docutils literal"><span class="pre">38:C9:86:26:7E:38</span></code></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>macAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MAC address in the form <code class="docutils literal"><span class="pre">38:C9:86:26:7E:38</span></code></li>
+<li><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">return the host details if found otherwise an Exception will be raised</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">return the host details if found otherwise an Exception will be raised</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.HostDetails" title="simpletr64.actions.HostDetails">HostDetails</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.HostDetails" title="simpletr64.actions.HostDetails">HostDetails</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="simpletr64.actions.Lan.getServiceType">
+<em class="property">static </em><code class="descname">getServiceType</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getServiceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given method name return the service type which supports it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>method</strong> &#8211; the method name to lookup</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the service type or None, an interface id needs to be added to this</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
 </tbody>
 </table>
@@ -966,6 +1022,8 @@ device is a AVM Fritz Box the DeviceTR64 objects needs to load the device defini
 not support all of the actions. This class does not implement all of the actions of this namespace, please
 check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
 needed information&#8217;s.</p>
+<p>All WAN actions ask for a interface id, this depends on the device if the counting starts with 0 or 1.
+Rarely a device supports more than one interface but for consistency reasons you can choose your interface.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p><a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>,
@@ -974,15 +1032,17 @@ needed information&#8217;s.</p>
 </div>
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getADSLInfo">
-<code class="descname">getADSLInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getADSLInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getADSLInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getADSLInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get basic ADSL information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">ADSL informations.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ADSLInfo" title="simpletr64.actions.ADSLInfo">ADSLInfo</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">ADSL informations.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ADSLInfo" title="simpletr64.actions.ADSLInfo">ADSLInfo</a></td>
 </tr>
 </tbody>
 </table>
@@ -990,15 +1050,17 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getByteStatistic">
-<code class="descname">getByteStatistic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getByteStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getByteStatistic</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getByteStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetTotalBytesSent&amp;GetTotalBytesReceived actions to get WAN statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total bytes sent and total bytes received</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total bytes sent and total bytes received</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
 </tr>
 </tbody>
 </table>
@@ -1006,15 +1068,17 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getConnectionInfo">
-<code class="descname">getConnectionInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getConnectionInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getConnectionInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getConnectionInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get WAN connection information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">WAN connection information&#8217;s.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ConnectionInfo" title="simpletr64.actions.ConnectionInfo">ConnectionInfo</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">WAN connection information&#8217;s.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ConnectionInfo" title="simpletr64.actions.ConnectionInfo">ConnectionInfo</a></td>
 </tr>
 </tbody>
 </table>
@@ -1022,15 +1086,17 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getEthernetLinkStatus">
-<code class="descname">getEthernetLinkStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getEthernetLinkStatus" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getEthernetLinkStatus</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getEthernetLinkStatus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetEthernetLinkStatus action to get the status of the ethernet link.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">status of the ethernet link</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">status of the ethernet link</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
 </tbody>
 </table>
@@ -1038,15 +1104,17 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getLinkInfo">
-<code class="descname">getLinkInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getLinkInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get basic WAN link information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">basic WAN link information&#8217;s</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkInfo" title="simpletr64.actions.WanLinkInfo">WanLinkInfo</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">basic WAN link information&#8217;s</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkInfo" title="simpletr64.actions.WanLinkInfo">WanLinkInfo</a></td>
 </tr>
 </tbody>
 </table>
@@ -1054,15 +1122,17 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getLinkProperties">
-<code class="descname">getLinkProperties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkProperties" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getLinkProperties</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetCommonLinkProperties action to get WAN link properties.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">WAN link properties</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkProperties" title="simpletr64.actions.WanLinkProperties">WanLinkProperties</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">WAN link properties</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkProperties" title="simpletr64.actions.WanLinkProperties">WanLinkProperties</a></td>
 </tr>
 </tbody>
 </table>
@@ -1070,15 +1140,35 @@ needed information&#8217;s.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getPacketStatistic">
-<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetTotalPacketsSent&amp;GetTotalPacketsReceived actions to get WAN statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="simpletr64.actions.Wan.getServiceType">
+<em class="property">static </em><code class="descname">getServiceType</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getServiceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given method name return the service type which supports it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>method</strong> &#8211; the method name to lookup</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the service type or None, an interface id needs to be added to this</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
 </tbody>
 </table>
@@ -1624,8 +1714,8 @@ device is a AVM Fritz Box the DeviceTR64 objects needs to load the device defini
 not support all of the actions. This class does not implement all of the actions of this namespace, please
 check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
 needed information&#8217;s.</p>
-<p>All Wifi actions ask for a device id, this depends on the device if the counting starts with 0 or 1. Often a device
-supports more than one device as for example to support 2.4 and 5 Ghz.</p>
+<p>All Wifi actions ask for a interface id, this depends on the device if the counting starts with 0 or 1.
+Often a device supports more than one interface as for example to support 2.4 and 5 Ghz.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p><a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a>, <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadSCPD" title="simpletr64.DeviceTR64.loadSCPD"><code class="xref py py-meth docutils literal"><span class="pre">loadSCPD()</span></code></a>,
@@ -1634,15 +1724,15 @@ supports more than one device as for example to support 2.4 and 5 Ghz.</p>
 </div>
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo">
-<code class="descname">getGenericAssociatedDeviceInfo</code><span class="sig-paren">(</span><em>wifiDeviceId</em>, <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getGenericAssociatedDeviceInfo</code><span class="sig-paren">(</span><em>index</em>, <em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetGenericAssociatedDeviceInfo action to get detailed information about a Wifi client.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</li>
 <li><strong>index</strong> &#8211; the number of the client</li>
+<li><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</li>
 </ul>
 </td>
 </tr>
@@ -1662,13 +1752,13 @@ supports more than one device as for example to support 2.4 and 5 Ghz.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getPacketStatistic">
-<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetPacketStatistics action to get Wifi statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
 </tr>
@@ -1678,15 +1768,33 @@ supports more than one device as for example to support 2.4 and 5 Ghz.</p>
 </table>
 </dd></dl>
 
+<dl class="staticmethod">
+<dt id="simpletr64.actions.Wifi.getServiceType">
+<em class="property">static </em><code class="descname">getServiceType</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getServiceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given method name return the service type which supports it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>method</strong> &#8211; the method name to lookup</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the service type or None, an interface id needs to be added to this</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getStatistic">
-<code class="descname">getStatistic</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getStatistic</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetStatistics action to get Wifi statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
 </tr>
@@ -1698,13 +1806,13 @@ supports more than one device as for example to support 2.4 and 5 Ghz.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getTotalAssociations">
-<code class="descname">getTotalAssociations</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getTotalAssociations" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getTotalAssociations</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getTotalAssociations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetTotalAssociations action to get the amount of associated Wifi clients.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the amount of Wifi clients</td>
 </tr>
@@ -1720,13 +1828,13 @@ supports more than one device as for example to support 2.4 and 5 Ghz.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getWifiInfo">
-<code class="descname">getWifiInfo</code><span class="sig-paren">(</span><em>wifiDeviceId</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getWifiInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getWifiInfo</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getWifiInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get Wifi basic information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiDeviceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the basic informations</td>
 </tr>
