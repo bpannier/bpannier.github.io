@@ -170,9 +170,9 @@ information&#8217;s.</p>
 <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
 <p class="last">The tools which have been provided with this library shows good use of the full library.</p>
 </div>
-<dl class="method">
-<dt id="simpletr64.actions.System.create">
-<code class="descname">create</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.create" title="Permalink to this definition">¶</a></dt>
+<dl class="staticmethod">
+<dt id="simpletr64.actions.System.createFromURL">
+<em class="property">static </em><code class="descname">createFromURL</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.createFromURL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory method to create a DeviceTR64 from an URL to the XML device definitions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -180,9 +180,9 @@ information&#8217;s.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new DeviceTR64 object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new object</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="devices.html#simpletr64.DeviceTR64" title="simpletr64.DeviceTR64">DeviceTR64</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.System" title="simpletr64.actions.System">System</a></td>
 </tr>
 </tbody>
 </table>
@@ -330,7 +330,7 @@ device. Or through a discovery requests which return&#8217;s the URL to the root
 <li><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the control URI, for example <code class="docutils literal"><span class="pre">/upnp/control/hosts</span></code></li>
 <li><strong>namespace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the namespace for the given action, for example <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code></li>
 <li><strong>action</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the name of the action to call, for example <code class="docutils literal"><span class="pre">GetGenericHostEntry</span></code></li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 <li><strong>kwargs</strong> (<em>dict[str, str]</em>) &#8211; optional arguments for the given action, depends if the action needs parameter. The arguments
 are given as dict where the key is the parameter name and the value the value of the parameter.</li>
 </ul>
@@ -603,7 +603,7 @@ loaded</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the root XML which sets the device definitions.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 </ul>
 </td>
 </tr>
@@ -641,7 +641,7 @@ standard.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
 types if None.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 <li><strong>ignoreFailures</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; if set to true and serviceType is None any failure in the iteration of loading
 all SCPD will be ignored.</li>
 </ul>
@@ -1083,9 +1083,9 @@ Sometimes a device may support more than one LAN interface.</p>
 <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
 <p class="last">The tools which have been provided with this library shows good use of the full library.</p>
 </div>
-<dl class="method">
-<dt id="simpletr64.actions.Lan.create">
-<code class="descname">create</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.create" title="Permalink to this definition">¶</a></dt>
+<dl class="staticmethod">
+<dt id="simpletr64.actions.Lan.createFromURL">
+<em class="property">static </em><code class="descname">createFromURL</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.createFromURL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory method to create a DeviceTR64 from an URL to the XML device definitions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1093,9 +1093,9 @@ Sometimes a device may support more than one LAN interface.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new DeviceTR64 object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new object</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="devices.html#simpletr64.DeviceTR64" title="simpletr64.DeviceTR64">DeviceTR64</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.Lan" title="simpletr64.actions.Lan">Lan</a></td>
 </tr>
 </tbody>
 </table>
@@ -1243,7 +1243,7 @@ device. Or through a discovery requests which return&#8217;s the URL to the root
 <li><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the control URI, for example <code class="docutils literal"><span class="pre">/upnp/control/hosts</span></code></li>
 <li><strong>namespace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the namespace for the given action, for example <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code></li>
 <li><strong>action</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the name of the action to call, for example <code class="docutils literal"><span class="pre">GetGenericHostEntry</span></code></li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 <li><strong>kwargs</strong> (<em>dict[str, str]</em>) &#8211; optional arguments for the given action, depends if the action needs parameter. The arguments
 are given as dict where the key is the parameter name and the value the value of the parameter.</li>
 </ul>
@@ -1594,7 +1594,7 @@ loaded</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the root XML which sets the device definitions.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 </ul>
 </td>
 </tr>
@@ -1632,7 +1632,7 @@ standard.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
 types if None.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 <li><strong>ignoreFailures</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; if set to true and serviceType is None any failure in the iteration of loading
 all SCPD will be ignored.</li>
 </ul>
@@ -2090,9 +2090,9 @@ Rarely a device supports more than one interface but for consistency reasons you
 <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
 <p class="last">The tools which have been provided with this library shows good use of the full library.</p>
 </div>
-<dl class="method">
-<dt id="simpletr64.actions.Wan.create">
-<code class="descname">create</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.create" title="Permalink to this definition">¶</a></dt>
+<dl class="staticmethod">
+<dt id="simpletr64.actions.Wan.createFromURL">
+<em class="property">static </em><code class="descname">createFromURL</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.createFromURL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory method to create a DeviceTR64 from an URL to the XML device definitions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2100,9 +2100,9 @@ Rarely a device supports more than one interface but for consistency reasons you
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new DeviceTR64 object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new object</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="devices.html#simpletr64.DeviceTR64" title="simpletr64.DeviceTR64">DeviceTR64</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.Wan" title="simpletr64.actions.Wan">Wan</a></td>
 </tr>
 </tbody>
 </table>
@@ -2250,7 +2250,7 @@ device. Or through a discovery requests which return&#8217;s the URL to the root
 <li><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the control URI, for example <code class="docutils literal"><span class="pre">/upnp/control/hosts</span></code></li>
 <li><strong>namespace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the namespace for the given action, for example <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code></li>
 <li><strong>action</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the name of the action to call, for example <code class="docutils literal"><span class="pre">GetGenericHostEntry</span></code></li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 <li><strong>kwargs</strong> (<em>dict[str, str]</em>) &#8211; optional arguments for the given action, depends if the action needs parameter. The arguments
 are given as dict where the key is the parameter name and the value the value of the parameter.</li>
 </ul>
@@ -2617,7 +2617,7 @@ loaded</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the root XML which sets the device definitions.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 </ul>
 </td>
 </tr>
@@ -2655,7 +2655,7 @@ standard.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
 types if None.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 <li><strong>ignoreFailures</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; if set to true and serviceType is None any failure in the iteration of loading
 all SCPD will be ignored.</li>
 </ul>
@@ -3312,9 +3312,9 @@ Often a device supports more than one interface as for example to support 2.4 an
 <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a></p>
 <p class="last">The tools which have been provided with this library shows good use of the full library.</p>
 </div>
-<dl class="method">
-<dt id="simpletr64.actions.Wifi.create">
-<code class="descname">create</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.create" title="Permalink to this definition">¶</a></dt>
+<dl class="staticmethod">
+<dt id="simpletr64.actions.Wifi.createFromURL">
+<em class="property">static </em><code class="descname">createFromURL</code><span class="sig-paren">(</span><em>urlOfXMLDefinition</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.createFromURL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory method to create a DeviceTR64 from an URL to the XML device definitions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3322,9 +3322,9 @@ Often a device supports more than one interface as for example to support 2.4 an
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new DeviceTR64 object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the new object</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="devices.html#simpletr64.DeviceTR64" title="simpletr64.DeviceTR64">DeviceTR64</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.Wifi" title="simpletr64.actions.Wifi">Wifi</a></td>
 </tr>
 </tbody>
 </table>
@@ -3472,7 +3472,7 @@ device. Or through a discovery requests which return&#8217;s the URL to the root
 <li><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the control URI, for example <code class="docutils literal"><span class="pre">/upnp/control/hosts</span></code></li>
 <li><strong>namespace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the namespace for the given action, for example <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code></li>
 <li><strong>action</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the name of the action to call, for example <code class="docutils literal"><span class="pre">GetGenericHostEntry</span></code></li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 <li><strong>kwargs</strong> (<em>dict[str, str]</em>) &#8211; optional arguments for the given action, depends if the action needs parameter. The arguments
 are given as dict where the key is the parameter name and the value the value of the parameter.</li>
 </ul>
@@ -3817,7 +3817,7 @@ loaded</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the root XML which sets the device definitions.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 </ul>
 </td>
 </tr>
@@ -3855,7 +3855,7 @@ standard.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
 types if None.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 <li><strong>ignoreFailures</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; if set to true and serviceType is None any failure in the iteration of loading
 all SCPD will be ignored.</li>
 </ul>

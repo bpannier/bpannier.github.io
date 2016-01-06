@@ -388,7 +388,7 @@ device. Or through a discovery requests which return&#8217;s the URL to the root
 <li><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the control URI, for example <code class="docutils literal"><span class="pre">/upnp/control/hosts</span></code></li>
 <li><strong>namespace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the namespace for the given action, for example <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code></li>
 <li><strong>action</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the name of the action to call, for example <code class="docutils literal"><span class="pre">GetGenericHostEntry</span></code></li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 <li><strong>kwargs</strong> (<em>dict[str, str]</em>) &#8211; optional arguments for the given action, depends if the action needs parameter. The arguments
 are given as dict where the key is the parameter name and the value the value of the parameter.</li>
 </ul>
@@ -611,7 +611,7 @@ loaded</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>urlOfXMLDefinition</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the URL to the root XML which sets the device definitions.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 </ul>
 </td>
 </tr>
@@ -649,7 +649,7 @@ standard.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>serviceType</strong> &#8211; the serviceType for which the action definitions should be loaded or all known service
 types if None.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the timeout for downloading</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout for downloading</li>
 <li><strong>ignoreFailures</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; if set to true and serviceType is None any failure in the iteration of loading
 all SCPD will be ignored.</li>
 </ul>
