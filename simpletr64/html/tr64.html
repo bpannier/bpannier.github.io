@@ -704,7 +704,8 @@ Sometimes a device may support more than one LAN interface.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>macAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MAC address in the form <code class="docutils literal"><span class="pre">38:C9:86:26:7E:38</span></code></li>
+<li><strong>macAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MAC address in the form <code class="docutils literal"><span class="pre">38:C9:86:26:7E:38</span></code>; be aware that the MAC address might
+be case sensitive, depending on the router</li>
 <li><strong>lanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
 <li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 </ul>
@@ -1931,6 +1932,36 @@ Often a device supports more than one interface as for example to support 2.4 an
 </dd></dl>
 
 <dl class="method">
+<dt id="simpletr64.actions.Wifi.getSpecificAssociatedDeviceInfo">
+<code class="descname">getSpecificAssociatedDeviceInfo</code><span class="sig-paren">(</span><em>macAddress</em>, <em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getSpecificAssociatedDeviceInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GetSpecificAssociatedDeviceInfo action to get detailed information about a Wifi client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>macAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MAC address in the form <code class="docutils literal"><span class="pre">38:C9:86:26:7E:38</span></code>; be aware that the MAC address might
+be case sensitive, depending on the router</li>
+<li><strong>wifiInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the detailed information&#8217;s about a Wifi client</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.WifiDeviceInfo" title="simpletr64.actions.WifiDeviceInfo">WifiDeviceInfo</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo" title="simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo"><code class="xref py py-meth docutils literal"><span class="pre">getGenericAssociatedDeviceInfo()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="simpletr64.actions.Wifi.getStatistic">
 <code class="descname">getStatistic</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetStatistics action to get Wifi statistics.</p>
@@ -2011,7 +2042,7 @@ Often a device supports more than one interface as for example to support 2.4 an
 <hr class="docutils" />
 <dl class="class">
 <dt id="simpletr64.actions.WifiDeviceInfo">
-<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">WifiDeviceInfo</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.WifiDeviceInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">WifiDeviceInfo</code><span class="sig-paren">(</span><em>results</em>, <em>macAddress=None</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.WifiDeviceInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>A container class for Wifi device information&#8217;s.</p>
 <dl class="attribute">
 <dt id="simpletr64.actions.WifiDeviceInfo.authenticated">
