@@ -498,7 +498,7 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.System.getSystemInfo">
-<code class="descname">getSystemInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getSystemInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getSystemInfo</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getSystemInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get information&#8217;s about the System on the device.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -514,7 +514,7 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.System.getTimeInfo">
-<code class="descname">getTimeInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getTimeInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getTimeInfo</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.getTimeInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get information&#8217;s about the time on the device.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -710,7 +710,7 @@ all SCPD will be ignored.</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.System.reboot">
-<code class="descname">reboot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.reboot" title="Permalink to this definition">¶</a></dt>
+<code class="descname">reboot</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.reboot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reboot the device</p>
 </dd></dl>
 
@@ -1283,17 +1283,23 @@ name of the result argument and the value is the value of the result.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getAmountOfHostsConnected">
-<code class="descname">getAmountOfHostsConnected</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getAmountOfHostsConnected" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getAmountOfHostsConnected</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getAmountOfHostsConnected" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute NewHostNumberOfEntries action to get the amount of known hosts.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the amount of known hosts.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the amount of known hosts.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1342,17 +1348,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getEthernetInfo">
-<code class="descname">getEthernetInfo</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getEthernetInfo</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get information&#8217;s about the Ethernet interface.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">information&#8217;s about the Ethernet interface.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">information&#8217;s about the Ethernet interface.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetInfo" title="simpletr64.actions.EthernetInfo">EthernetInfo</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.EthernetInfo" title="simpletr64.actions.EthernetInfo">EthernetInfo</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1360,17 +1372,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getEthernetStatistic">
-<code class="descname">getEthernetStatistic</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getEthernetStatistic</code><span class="sig-paren">(</span><em>lanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getEthernetStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetStatistics action to get statistics of the Ethernet interface.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">statisticss of the Ethernet interface.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">statisticss of the Ethernet interface.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.EthernetStatistic" title="simpletr64.actions.EthernetStatistic">EthernetStatistic</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.EthernetStatistic" title="simpletr64.actions.EthernetStatistic">EthernetStatistic</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1414,7 +1432,7 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getHostDetailsByIndex">
-<code class="descname">getHostDetailsByIndex</code><span class="sig-paren">(</span><em>index</em>, <em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByIndex" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getHostDetailsByIndex</code><span class="sig-paren">(</span><em>index</em>, <em>lanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByIndex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetGenericHostEntry action to get detailed information&#8217;s of a connected host.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1422,7 +1440,8 @@ loaded</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>index</strong> &#8211; the index of the host</li>
-<li><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</li>
+<li><strong>lanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 </ul>
 </td>
 </tr>
@@ -1442,7 +1461,7 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Lan.getHostDetailsByMACAddress">
-<code class="descname">getHostDetailsByMACAddress</code><span class="sig-paren">(</span><em>macAddress</em>, <em>lanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByMACAddress" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getHostDetailsByMACAddress</code><span class="sig-paren">(</span><em>macAddress</em>, <em>lanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Lan.getHostDetailsByMACAddress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get host details for a host specified by its MAC address.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1450,7 +1469,8 @@ loaded</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>macAddress</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MAC address in the form <code class="docutils literal"><span class="pre">38:C9:86:26:7E:38</span></code></li>
-<li><strong>lanInterfaceId</strong> &#8211; the id of the Wifi device</li>
+<li><strong>lanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 </ul>
 </td>
 </tr>
@@ -2290,17 +2310,23 @@ name of the result argument and the value is the value of the result.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getADSLInfo">
-<code class="descname">getADSLInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getADSLInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getADSLInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getADSLInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get basic ADSL information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">ADSL informations.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ADSL informations.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ADSLInfo" title="simpletr64.actions.ADSLInfo">ADSLInfo</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.ADSLInfo" title="simpletr64.actions.ADSLInfo">ADSLInfo</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2308,17 +2334,23 @@ name of the result argument and the value is the value of the result.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getByteStatistic">
-<code class="descname">getByteStatistic</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getByteStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getByteStatistic</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getByteStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetTotalBytesSent&amp;GetTotalBytesReceived actions to get WAN statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total bytes sent and total bytes received</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a tuple of two values, total bytes sent and total bytes received</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list[int]</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2326,17 +2358,23 @@ name of the result argument and the value is the value of the result.</p>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getConnectionInfo">
-<code class="descname">getConnectionInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getConnectionInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getConnectionInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getConnectionInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get WAN connection information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">WAN connection information&#8217;s.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">WAN connection information&#8217;s.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.ConnectionInfo" title="simpletr64.actions.ConnectionInfo">ConnectionInfo</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.ConnectionInfo" title="simpletr64.actions.ConnectionInfo">ConnectionInfo</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2381,17 +2419,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getEthernetLinkStatus">
-<code class="descname">getEthernetLinkStatus</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getEthernetLinkStatus" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getEthernetLinkStatus</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getEthernetLinkStatus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetEthernetLinkStatus action to get the status of the ethernet link.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">status of the ethernet link</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">status of the ethernet link</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2435,17 +2479,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getLinkInfo">
-<code class="descname">getLinkInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getLinkInfo</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get basic WAN link information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">basic WAN link information&#8217;s</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">basic WAN link information&#8217;s</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkInfo" title="simpletr64.actions.WanLinkInfo">WanLinkInfo</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.WanLinkInfo" title="simpletr64.actions.WanLinkInfo">WanLinkInfo</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2453,17 +2503,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getLinkProperties">
-<code class="descname">getLinkProperties</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkProperties" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getLinkProperties</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getLinkProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetCommonLinkProperties action to get WAN link properties.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">WAN link properties</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">WAN link properties</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WanLinkProperties" title="simpletr64.actions.WanLinkProperties">WanLinkProperties</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.WanLinkProperties" title="simpletr64.actions.WanLinkProperties">WanLinkProperties</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2471,17 +2527,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wan.getPacketStatistic">
-<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetTotalPacketsSent&amp;GetTotalPacketsReceived actions to get WAN statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wanInterfaceId</strong> &#8211; the id of the WAN device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a tuple of two values, total packets sent and total packets received</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list[int]</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -3585,15 +3647,16 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo">
-<code class="descname">getGenericAssociatedDeviceInfo</code><span class="sig-paren">(</span><em>index</em>, <em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getGenericAssociatedDeviceInfo</code><span class="sig-paren">(</span><em>index</em>, <em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getGenericAssociatedDeviceInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetGenericAssociatedDeviceInfo action to get detailed information about a Wifi client.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>index</strong> &#8211; the number of the client</li>
-<li><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</li>
+<li><strong>index</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the number of the client</li>
+<li><strong>wifiInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 </ul>
 </td>
 </tr>
@@ -3613,17 +3676,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getPacketStatistic">
-<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getPacketStatistic</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getPacketStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetPacketStatistics action to get Wifi statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wifiInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a tuple of two values, total packets sent and total packets received</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list[int]</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -3686,17 +3755,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getStatistic">
-<code class="descname">getStatistic</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getStatistic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getStatistic</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getStatistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetStatistics action to get Wifi statistics.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wifiInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of two values, total packets sent and total packets received</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a tuple of two values, total packets sent and total packets received</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[int]</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list[int]</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -3704,17 +3779,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getTotalAssociations">
-<code class="descname">getTotalAssociations</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getTotalAssociations" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getTotalAssociations</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getTotalAssociations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetTotalAssociations action to get the amount of associated Wifi clients.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wifiInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the amount of Wifi clients</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the amount of Wifi clients</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -3726,17 +3807,23 @@ loaded</li>
 
 <dl class="method">
 <dt id="simpletr64.actions.Wifi.getWifiInfo">
-<code class="descname">getWifiInfo</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getWifiInfo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getWifiInfo</code><span class="sig-paren">(</span><em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi.getWifiInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute GetInfo action to get Wifi basic information&#8217;s.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wifiInterfaceId</strong> &#8211; the id of the Wifi device</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wifiInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi device</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the basic informations</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the basic informations</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#simpletr64.actions.WifiBasicInfo" title="simpletr64.actions.WifiBasicInfo">WifiBasicInfo</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#simpletr64.actions.WifiBasicInfo" title="simpletr64.actions.WifiBasicInfo">WifiBasicInfo</a></p>
+</td>
 </tr>
 </tbody>
 </table>
