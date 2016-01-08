@@ -157,12 +157,12 @@ send me the output of the following script execution:</p>
 and <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Time:1</span></code>.</p>
 <p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Time:1</span></code> and
 <code class="docutils literal"><span class="pre">urn:dslforum-org:service:DeviceInfo:1</span></code>
-namespace. Unless the device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
-<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods. For a Fritz.box
-<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might not
-support all of the actions. This class does not implement all of the actions of this namespace, please check the
-SCPD definitions if you miss some functionality. This library provides some tools to gather the needed
-information&#8217;s.</p>
+namespace. Unless the device is a AVM Fritz product the object needs to load the device definitions with
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods.
+For a Fritz product <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> can be called also this might not be future
+compatible. Also a device might not support all of the actions. This class does not implement all of the actions
+of this namespace, please check the SCPD definitions if you miss some functionality. This library provides some
+tools to gather the needed information&#8217;s.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p>Baseclass: <a class="reference internal" href="devices.html#simpletr64.DeviceTR64" title="simpletr64.DeviceTR64"><code class="xref py py-class docutils literal"><span class="pre">DeviceTR64</span></code></a></p>
@@ -242,6 +242,22 @@ information&#8217;s.</p>
 <dt id="simpletr64.actions.System.reboot">
 <code class="descname">reboot</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.reboot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reboot the device</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.System.softwareUpdateAvailable">
+<code class="descname">softwareUpdateAvailable</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.System.softwareUpdateAvailable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if a software update is available</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if a software update is available</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -557,12 +573,12 @@ information&#8217;s.</p>
 <dd><p>Class to get various LAN information&#8217;s of a device which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code> and
 <code class="docutils literal"><span class="pre">urn:dslforum-org:service:LAN*</span></code>.</p>
 <p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:LAN*</span></code> and <code class="docutils literal"><span class="pre">urn:dslforum-org:service:Hosts:1</span></code>
-namespace. Unless the device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
+namespace. Unless the device is a AVM Fritz product the object needs to load the device definitions with
 <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods.
-For a Fritz.box <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might
-not support all of the actions. This class does not implement all of the actions of this namespace, please
-check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
-needed information&#8217;s.</p>
+For a Fritz product <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> can be called also this might not be future
+compatible. Also a device might not support all of the actions. This class does not implement all of the actions
+of this namespace, please check the SCPD definitions if you miss some functionality. This library provides some
+tools to gather the needed information&#8217;s.</p>
 <p>All LAN actions ask for a interface id, this depends on the device if the counting starts with 0 or 1.
 Sometimes a device may support more than one LAN interface.</p>
 <div class="admonition seealso">
@@ -1093,12 +1109,12 @@ be case sensitive, depending on the router</li>
 <em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">Wan</code><span class="sig-paren">(</span><em>hostname</em>, <em>port=49000</em>, <em>protocol='http'</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to get various WAN information&#8217;s of a device which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WAN*</span></code>.</p>
 <p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WAN*</span> <span class="pre">namespace</span></code>. Unless the
-device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
-<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods. For a Fritz.box
-<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might
-not support all of the actions. This class does not implement all of the actions of this namespace, please
-check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
-needed information&#8217;s.</p>
+device is a AVM Fritz product the object needs to load the device definitions with
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods.
+For a Fritz product <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> can be called also this might not be future
+compatible. Also a device might not support all of the actions. This class does not implement all of the actions
+of this namespace, please check the SCPD definitions if you miss some functionality. This library provides some
+tools to gather the needed information&#8217;s.</p>
 <p>All WAN actions ask for a interface id, this depends on the device if the counting starts with 0 or 1.
 Rarely a device supports more than one interface but for consistency reasons you can choose your interface.</p>
 <div class="admonition seealso">
@@ -1313,6 +1329,24 @@ Rarely a device supports more than one interface but for consistency reasons you
 </dd></dl>
 
 <dl class="method">
+<dt id="simpletr64.actions.Wan.requestConnection">
+<code class="descname">requestConnection</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.requestConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request the connection to be established</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN interface</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="simpletr64.actions.Wan.setEnable">
 <code class="descname">setEnable</code><span class="sig-paren">(</span><em>status</em>, <em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.setEnable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set enable status for a WAN interface, be careful you don&#8217;t cut yourself off.</p>
@@ -1322,6 +1356,24 @@ Rarely a device supports more than one interface but for consistency reasons you
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>status</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; enable or disable the interface</li>
+<li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN interface</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Wan.terminateConnection">
+<code class="descname">terminateConnection</code><span class="sig-paren">(</span><em>wanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wan.terminateConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the connection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>wanInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the WAN interface</li>
 <li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
 </ul>
@@ -1865,12 +1917,12 @@ Rarely a device supports more than one interface but for consistency reasons you
 <em class="property">class </em><code class="descclassname">simpletr64.actions.</code><code class="descname">Wifi</code><span class="sig-paren">(</span><em>hostname</em>, <em>port=49000</em>, <em>protocol='http'</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Wifi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to get Wifi information&#8217;s of a device which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WLANConfiguration:X</span></code>.</p>
 <p>The class supports devices which supports <code class="docutils literal"><span class="pre">urn:dslforum-org:service:WLANConfiguration:X</span></code> namespace. Unless the
-device is a AVM Fritz Box the DeviceTR64 objects needs to load the device definitions with
-<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods. For a Fritz.box
-<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> has to be called. Also a device might
-not support all of the actions. This class does not implement all of the actions of this namespace, please
-check the SCPD definitions if you miss some functionality. This library provides some tools to gather the
-needed information&#8217;s.</p>
+device is a AVM Fritz product the object needs to load the device definitions with
+<a class="reference internal" href="devices.html#simpletr64.DeviceTR64.loadDeviceDefinitions" title="simpletr64.DeviceTR64.loadDeviceDefinitions"><code class="xref py py-meth docutils literal"><span class="pre">loadDeviceDefinitions()</span></code></a> before the usage of any of the methods.
+For a Fritz product <a class="reference internal" href="devices.html#simpletr64.DeviceTR64.setupTR64Device" title="simpletr64.DeviceTR64.setupTR64Device"><code class="xref py py-meth docutils literal"><span class="pre">setupTR64Device()</span></code></a> can be called also this might not be future
+compatible. Also a device might not support all of the actions. This class does not implement all of the actions
+of this namespace, please check the SCPD definitions if you miss some functionality. This library provides some
+tools to gather the needed information&#8217;s.</p>
 <p>All Wifi actions ask for a interface id, this depends on the device if the counting starts with 0 or 1.
 Often a device supports more than one interface as for example to support 2.4 and 5 Ghz.</p>
 <div class="admonition seealso">
