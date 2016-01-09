@@ -2499,6 +2499,28 @@ Sometimes a device may support more than one LAN interface.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="simpletr64.actions.Fritz.getCallList">
+<code class="descname">getCallList</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Fritz.getCallList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the list of phone calls made</p>
+<p>Example of a phone call result:
+[{&#8216;Count&#8217;: None, &#8216;Name&#8217;: None, &#8216;CalledNumber&#8217;: &#8216;030868709971&#8217;, &#8216;Numbertype&#8217;: &#8216;sip&#8217;, &#8216;Duration&#8217;: &#8216;0:01&#8217;,
+&#8216;Caller&#8217;: &#8216;015155255399&#8217;, &#8216;Called&#8217;: &#8216;SIP: 030868729971&#8217;, &#8216;Date&#8217;: &#8216;02.01.14 13:14&#8217;, &#8216;Device&#8217;: &#8216;Anrufbeantworter&#8217;,
+&#8216;Path&#8217;: None, &#8216;Port&#8217;: &#8216;40&#8217;, &#8216;Type&#8217;: &#8216;1&#8217;, &#8216;Id&#8217;: &#8216;15&#8217;}]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of made phone calls</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="simpletr64.actions.Fritz.getServiceType">
 <em class="property">static </em><code class="descname">getServiceType</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Fritz.getServiceType" title="Permalink to this definition">¶</a></dt>
@@ -2541,7 +2563,7 @@ Sometimes a device may support more than one LAN interface.</p>
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">setOptimizedForIPTV()</span></code></p>
+<p class="last"><a class="reference internal" href="#simpletr64.actions.Fritz.setOptimizedForIPTV" title="simpletr64.actions.Fritz.setOptimizedForIPTV"><code class="xref py py-meth docutils literal"><span class="pre">setOptimizedForIPTV()</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -2572,6 +2594,29 @@ be case sensitive, depending on the router</li>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#simpletr64.actions.Lan.getHostDetailsByMACAddress" title="simpletr64.actions.Lan.getHostDetailsByMACAddress"><code class="xref py py-meth docutils literal"><span class="pre">getHostDetailsByMACAddress()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="simpletr64.actions.Fritz.setOptimizedForIPTV">
+<code class="descname">setOptimizedForIPTV</code><span class="sig-paren">(</span><em>status</em>, <em>wifiInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Fritz.setOptimizedForIPTV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set if the Wifi interface is optimized for IP TV</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>status</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; set if Wifi interface should be optimized</li>
+<li><strong>wifiInterfaceId</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the id of the Wifi interface</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#simpletr64.actions.Fritz.isOptimizedForIPTV" title="simpletr64.actions.Fritz.isOptimizedForIPTV"><code class="xref py py-meth docutils literal"><span class="pre">isOptimizedForIPTV()</span></code></a></p>
 </div>
 </dd></dl>
 
