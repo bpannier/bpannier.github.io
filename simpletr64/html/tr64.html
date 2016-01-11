@@ -2503,10 +2503,18 @@ Sometimes a device may support more than one LAN interface.</p>
 <dt id="simpletr64.actions.Fritz.getCallList">
 <code class="descname">getCallList</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Fritz.getCallList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the list of phone calls made</p>
-<p>Example of a phone call result:
-[{&#8216;Count&#8217;: None, &#8216;Name&#8217;: None, &#8216;CalledNumber&#8217;: &#8216;030868709971&#8217;, &#8216;Numbertype&#8217;: &#8216;sip&#8217;, &#8216;Duration&#8217;: &#8216;0:01&#8217;,
-&#8216;Caller&#8217;: &#8216;015155255399&#8217;, &#8216;Called&#8217;: &#8216;SIP: 030868729971&#8217;, &#8216;Date&#8217;: &#8216;02.01.14 13:14&#8217;, &#8216;Device&#8217;: &#8216;Anrufbeantworter&#8217;,
-&#8216;Path&#8217;: None, &#8216;Port&#8217;: &#8216;40&#8217;, &#8216;Type&#8217;: &#8216;1&#8217;, &#8216;Id&#8217;: &#8216;15&#8217;}]</p>
+<p>Example of a phone call result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[{</span><span class="s">&#39;Count&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;Name&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;CalledNumber&#39;</span><span class="p">:</span> <span class="s">&#39;030868709971&#39;</span><span class="p">,</span> <span class="s">&#39;Numbertype&#39;</span><span class="p">:</span> <span class="s">&#39;sip&#39;</span><span class="p">,</span> <span class="s">&#39;Duration&#39;</span><span class="p">:</span> <span class="s">&#39;0:01&#39;</span><span class="p">,</span>
+<span class="s">&#39;Caller&#39;</span><span class="p">:</span> <span class="s">&#39;015155255399&#39;</span><span class="p">,</span> <span class="s">&#39;Called&#39;</span><span class="p">:</span> <span class="s">&#39;SIP: 030868729971&#39;</span><span class="p">,</span> <span class="s">&#39;Date&#39;</span><span class="p">:</span> <span class="s">&#39;02.01.14 13:14&#39;</span><span class="p">,</span>
+<span class="s">&#39;Device&#39;</span><span class="p">:</span> <span class="s">&#39;Anrufbeantworter&#39;</span><span class="p">,</span><span class="s">&#39;Path&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;Port&#39;</span><span class="p">:</span> <span class="s">&#39;40&#39;</span><span class="p">,</span> <span class="s">&#39;Type&#39;</span><span class="p">:</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;Id&#39;</span><span class="p">:</span> <span class="s">&#39;15&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>Types:</p>
+<ul class="simple">
+<li>1 - answered</li>
+<li>2 - missed</li>
+<li>3 - outgoing</li>
+</ul>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
