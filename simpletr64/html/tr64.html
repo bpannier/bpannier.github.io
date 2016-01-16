@@ -2486,7 +2486,7 @@ Sometimes a device may support more than one LAN interface.</p>
 <dl class="method">
 <dt id="simpletr64.actions.Fritz.doUpdate">
 <code class="descname">doUpdate</code><span class="sig-paren">(</span><em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Fritz.doUpdate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Do an update if available.</p>
+<dd><p>Do a software update of the Fritz Box if available.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2494,6 +2494,8 @@ Sometimes a device may support more than one LAN interface.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; the timeout to wait for the action to be executed</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of if an update was available and the update state (bool, str)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple(bool, str)</td>
 </tr>
 </tbody>
 </table>
@@ -2523,7 +2525,7 @@ Sometimes a device may support more than one LAN interface.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of made phone calls</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[dict[str: str]]</td>
 </tr>
 </tbody>
 </table>
@@ -2578,7 +2580,7 @@ Sometimes a device may support more than one LAN interface.</p>
 <dl class="method">
 <dt id="simpletr64.actions.Fritz.sendWakeOnLan">
 <code class="descname">sendWakeOnLan</code><span class="sig-paren">(</span><em>macAddress</em>, <em>lanInterfaceId=1</em>, <em>timeout=1</em><span class="sig-paren">)</span><a class="headerlink" href="#simpletr64.actions.Fritz.sendWakeOnLan" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute .</p>
+<dd><p>Send a wake up package to a device specified by its MAC address.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
