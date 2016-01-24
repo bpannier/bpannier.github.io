@@ -36,6 +36,6 @@ $(window).resize(function(){
         $("li.nav-item-0 a").text("Top");
     }
     else {
-        $("li.nav-item-0 a").text("Simple TR64 UPnP 1.0.5 documentation");
+        $("li.nav-item-0 a").text("Simple TR64 UPnP 1.0.6 documentation");
     }
 });
